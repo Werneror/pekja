@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Pekja</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static "layui/css/layui.css" %}">
+</head>
+<body style="margin: 30px 50px 0 50px">
+  <fieldset class="layui-elem-field layui-field-title">
+    <legend>时间线</legend>
+  </fieldset>
+
+  <ul class="layui-timeline">
+    {% for record in records %}
+    <li class="layui-timeline-item">
+      <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+      <div class="layui-timeline-content layui-text">
+        <h3 class="layui-timeline-title">{{ record.date }}</h3>
+        {% for content in record.contents %}
+        <p>
+          {{ content.record }}
+          <span class="layui-badge-rim" style="margin-left: 3px;">{{content.project}}</span>
+          {% if content.type %}
+          <span class="layui-badge layui-bg-gray">{{content.type}}</span>
+          {% endif %}
+          {% if content.source %}
+          <span class="layui-badge layui-bg-gray">{{content.source}}</span>
+          {% endif %}
+        </p>
+        {% endfor %}
+      </div>
+    </li>
+    {% endfor %}
+    <li class="layui-timeline-item">
+      <i class="layui-icon layui-timeline-axis"></i>
+      <div class="layui-timeline-content layui-text">
+        <div class="layui-timeline-title">开始</div>
+      </div>
+    </li>
+  </ul>
+
+  <div class="layui-btn-group">
+    <a type="button" class="layui-btn layui-btn-primary {% if disabled_pre_page %}layui-btn-disabled{% endif%}" {% if not disabled_pre_page %}href="?page={{pre_page}}&project={{project}}&type={{type}}"{% endif %}>
+      <i class="layui-icon layui-icon-left"></i>
+    </a>
+    <a type="button" class="layui-btn layui-btn-primary" href="/admin" target="_blank">
+      <i class="layui-icon layui-icon-edit"></i>
+    </a>
+    <a type="button" class="layui-btn layui-btn-primary {% if disabled_next_page %}layui-btn-disabled{% endif%}" {% if not disabled_next_page %}href="?page={{next_page}}&project={{project}}&type={{type}}"{% endif %}>
+      <i class="layui-icon layui-icon-right"></i>
+    </a>
+  </div>
+
+  <form class="layui-form" action="" style="margin-top: 10px;">
+    <div class="layui-form-item">
+      <div class="layui-input-inline">
+        <input type="text" name="project" placeholder="请输入项目名" autocomplete="off" class="layui-input">
+      </div>
+      <div class="layui-input-inline">
+        <input type="text" name="type" placeholder="请输入记录类型" autocomplete="off" class="layui-input">
+      </div>
+      <div class="layui-input-inline">
+        <button class="layui-btn layui-btn layui-btn-primary" style="display: inline;">过滤</button>
+      </div>
+    </div>
+  </form>
+
+</body>
+</html>
