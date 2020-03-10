@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'import_export',
     'asset',
     'task',
 ]
@@ -123,3 +124,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+DATA_DIRS = os.path.join(BASE_DIR, "data")
+CRON_USER = True    # 为True表示当前用户，也可以写具体的用户名

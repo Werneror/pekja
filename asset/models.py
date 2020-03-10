@@ -3,7 +3,7 @@ from django.db import models
 
 class Project(models.Model):
 
-    name = models.CharField(verbose_name='名称', max_length=100)
+    name = models.CharField(verbose_name='项目名', max_length=100)
     src_link = models.URLField(verbose_name='SRC链接', null=True, blank=True)
     comment = models.TextField(verbose_name='备注', null=True, blank=True)
 

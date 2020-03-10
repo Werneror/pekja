@@ -130,5 +130,6 @@ dmypy.json
 
 # Custom
 venv/
-.idea/*
+.idea/
 *.log
+data/*.txt
