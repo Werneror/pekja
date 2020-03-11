@@ -26,8 +26,11 @@ class ToolAdmin(ImportExportActionModelAdmin):
             set_cron_task(task)
 
     def link_url(self, obj):
-        url = obj.link.replace('"', r'%22')
-        return format_html('<a href="{}" target="_blank">{}</a>'.format(url, escape(obj.link)))
+        if obj.link:
+            url = obj.link.replace('"', r'%22')
+            return format_html('<a href="{}" target="_blank">{}</a>'.format(url, escape(obj.link)))
+        else:
+            return obj.link
 
     link_url.short_description = '项目链接'
 

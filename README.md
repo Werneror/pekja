@@ -2,15 +2,22 @@
 
 SRC情报收集管理系统。
 
-未开放完毕，敬请期待。。。
-
-因使用到crontab故只支持Linux系统。
+未开发完毕，敬请期待。。。
 
 ## 简介
 
 在SRC漏洞挖掘中情报很关键，且需要进行**持续**的情报收集。那些新增的资产往往是最容易发现漏洞的资产。
 所以开发了此系统用于自动持续进行情报收集，自动识别新增资产并报告。
 
+## 操作系统兼容性
+
+因使用到crontab故只支持Linux系统。
+但在Windows中，生成了data/windows_crontab.txt，只要设法让这个文件中的定时任务运行，也可以。
+
+## 支持的工具
+
+- Nmap子域名爆破
+- 
 
 ## 设计目标
 
@@ -53,6 +60,8 @@ SRC情报收集管理系统。
 - 记录类型
 - 来源（来自于什么工具，多个工具有逗号分隔）
 
+主键是记录、所属项目和记录类型，都相同时才算重复。
+
 
 ### 工具表
 
@@ -63,6 +72,7 @@ SRC情报收集管理系统。
 - 记录类型
 - 解析工具生成文件的Python类名，直接写类名，所有类都在parse文件夹中
 - 工具调用的命令（系统命令，不限于Python编写，要求接受文件输入，且输出必须是一个文件，用{input_file}做占位符）
+- 输入类型（命令行参数，文件）
 - 备注
 
 生成最终命令使用字符串替换而不是format，有多个占位符则都替换掉
@@ -74,20 +84,30 @@ SRC情报收集管理系统。
 - 项目（外键）
 - 工具（外键）
 - 输入
+- 输入文件类型（空，静态，动态）
 - 调度（字符串，cron表达式）
 
 ## 备份工具数据
 
 导出：
 
-```
+```bash
 python manage.py dumpdata task.tool --format=json > tool.json
 ```
 
 导入：
 
-```
+```bash
 python manage.py loaddata tool.json
+```
+
+## 运行
+
+```bash
+python -m pip install -r requirements.txt
+python manage.py migrate
+python manage.py loaddata tool.json
+python manage.py runserver
 ```
 
 ## 工作流程
@@ -128,5 +148,6 @@ python manage.py loaddata tool.json
 
 ## 类似项目
 
+- [spiderfoot: an open source intelligence automation tool](https://github.com/smicallef/spiderfoot)
 - [LangSrcCurise: SRC子域名资产监控](https://github.com/LangziFun/LangSrcCurise)
 - [get_domain: 域名收集与监测](https://github.com/guimaizi/get_domain)

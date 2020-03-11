@@ -17,8 +17,11 @@ class ProjectAdmin(ImportExportActionModelAdmin):
     resource_class = ProjectResource
 
     def src_link_url(self, obj):
-        url = obj.src_link.replace('"', r'%22')
-        return format_html('<a href="{}" target="_blank">{}</a>'.format(url, escape(obj.src_link)))
+        if obj.src_link:
+            url = obj.src_link.replace('"', r'%22')
+            return format_html('<a href="{}" target="_blank">{}</a>'.format(url, escape(obj.src_link)))
+        else:
+            return obj.src_link
 
     src_link_url.short_description = 'SRC链接'
 

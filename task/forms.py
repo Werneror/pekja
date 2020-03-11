@@ -6,7 +6,7 @@ from parse.parser import Parser
 
 class ToolForm(forms.ModelForm):
 
-    parse_class_name = forms.ChoiceField(choices=(), label='解析类名')
+    parse_class_name = forms.ChoiceField(choices=(), label='输出解析类')
 
     # 必须重写__init__方法，这样才能每次实例化表单时重新获取选项
     def __init__(self, *args, **kwargs):

@@ -10,8 +10,9 @@ from pekja.utils import get_task_cron_comment
 from pekja.utils import get_windows_cron_file_path
 from pekja.settings import CRON_USER
 from pekja.settings import BASE_DIR
-from task.models import Task
 from task.models import Tool
+from task.models import Task
+from asset.models import Record
 import parse
 
 
@@ -26,17 +27,24 @@ def set_cron_task(obj):
     task_cron_comment = get_task_cron_comment(obj)
 
     if obj.tool.input_type == Tool.INPUT_TYPE_FILE:
-        # 更新任务输入文件
-        with open(input_file_path, 'w', newline='') as f:
-            f.write(obj.input)
+        if obj.input_file_type == Task.INPUT_FILE_TYPE_STATIC:
+            # 更新任务输入文件
+            with open(input_file_path, 'w', newline='') as f:
+                f.write(obj.input)
         _input = input_file_path
     else:
         _input = obj.input
 
     # 生成调用工具的命令
-    command = obj.tool.command.replace('{input}', _input).replace('{output_file}', output_file_path)
-    command += ' && {} {} parse {}'.format(executable, os.path.join(BASE_DIR, 'manage.py'), obj.id)
+    pre_command = '{} {} update_input {}'.format(executable, os.path.join(BASE_DIR, 'manage.py'), obj.id)
+    tool_command = obj.tool.command.replace('{input}', _input).replace('{output_file}', output_file_path)
+    parse_command = '{} {} parse {}'.format(executable, os.path.join(BASE_DIR, 'manage.py'), obj.id)
+    if obj.input_file_type == Task.INPUT_FILE_TYPE_DYNAMIC:
+        command = ' && '.join([pre_command, tool_command, parse_command])
+    else:
+        command = ' && '.join([tool_command, parse_command])
 
+    # 打开定时任务文件
     if system() == 'Windows':
         cron = CronTab(tabfile=get_windows_cron_file_path())    # 仅用于调试
     else:
@@ -56,22 +64,31 @@ def set_cron_task(obj):
     cron.write()
 
 
-def run_parse(task_id):
+def run_parse(task):
     """
     运行解析类解析任务输出结果
-    :param task_id:
+    :param task:
     :return:
     """
     try:
-        task = Task.objects.get(id=task_id)
-    except Task.DoesNotExist:
-        print('Task with ID {} does not exist'.format(task_id))
+        parse_class = getattr(parse, task.tool.parse_class_name)
+    except AttributeError:
+        print('Parse class {} does not exist'.format(task.tool.parse_class_name))
     else:
-        try:
-            parse_class = getattr(parse, task.tool.parse_class_name)
-        except AttributeError:
-            print('Parse class {} does not exist'.format(task.tool.parse_class_name))
-        else:
-            p = parse_class(task)
-            p.parse()
-            p.rename_file()
+        p = parse_class(task)
+        p.parse()
+        p.rename_file()
+
+
+def update_input(task):
+    """
+    更新任务的输入
+    :param task:
+    :return:
+    """
+    if task.input_file_type == Task.INPUT_FILE_TYPE_DYNAMIC:
+        input_file_path = get_input_file_path(task)
+        with open(input_file_path, 'w') as f:
+            for record in Record.objects.filter(project=task.project, type=task.input):
+                f.write(record.record)
+                f.write('\n')
