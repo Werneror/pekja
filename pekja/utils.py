@@ -1,4 +1,5 @@
 import os
+import datetime
 
 from pekja.settings import DATA_DIRS
 from task.models import Task
@@ -36,3 +37,15 @@ def get_task_by_id(task_id):
         return None
     else:
         return task
+
+
+def validate_date_str(date_str):
+    try:
+        datetime.datetime.strptime(date_str, '%Y-%m-%d')
+        return True
+    except ValueError:
+        return False
+
+
+def get_today():
+    return datetime.datetime.now().strftime('%Y-%m-%d')
