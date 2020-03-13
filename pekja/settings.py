@@ -127,3 +127,10 @@ STATICFILES_DIRS = [
 
 DATA_DIRS = os.path.join(BASE_DIR, "data")
 CRON_USER = True    # 为True表示当前用户，也可以写具体的用户名
+
+EMAIL_USE_SSL = True
+EMAIL_HOST = 'smtp.ym.163.com'
+EMAIL_PORT = 994
+EMAIL_HOST_USER = 'pekja@werner.wiki'
+EMAIL_HOST_PASSWORD = '**************'
+DEFAULT_FROM_EMAIL = 'Pekja <{}>'.format(EMAIL_HOST_USER)

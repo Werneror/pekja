@@ -1,8 +1,9 @@
+import datetime
+
 from django.core.management.base import BaseCommand
 
-from pekja.utils import validate_date_str
-from pekja.utils import get_today
 from asset.report import generate_new_record_report
+from asset.report import send_report_by_mail
 
 
 class Command(BaseCommand):
@@ -12,8 +13,9 @@ class Command(BaseCommand):
         parser.add_argument('date', type=str, nargs='?')
 
     def handle(self, *args, **options):
-        date = options['date']
-        if date is None or not validate_date_str(date):
-            date = get_today()
+        try:
+            date = datetime.datetime.strptime('' if options.get('date') is None else options.get('date'), '%Y-%m-%d')
+        except ValueError:
+            date = datetime.datetime.now()
         report = generate_new_record_report(date)
-        # Todo: 邮件发送报告
+        send_report_by_mail(date, report)

@@ -1,3 +1,4 @@
 django==3.0.4
 django-import-export==2.0.2
 python-crontab==2.4.0
+tabulate==0.8.6

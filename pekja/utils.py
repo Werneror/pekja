@@ -1,6 +1,10 @@
 import os
-import datetime
 
+from django.contrib.auth.models import User
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+
+from pekja.settings import DEFAULT_FROM_EMAIL
 from pekja.settings import DATA_DIRS
 from task.models import Task
 
@@ -39,13 +43,17 @@ def get_task_by_id(task_id):
         return task
 
 
-def validate_date_str(date_str):
-    try:
-        datetime.datetime.strptime(date_str, '%Y-%m-%d')
-        return True
-    except ValueError:
-        return False
-
-
-def get_today():
-    return datetime.datetime.now().strftime('%Y-%m-%d')
+def send_mail_to_users(subject, title, message):
+    """
+    给所有用户发送邮件
+    :param subject:
+    :param title:
+    :param message:
+    :return:
+    """
+    emails = [email for email in User.objects.values_list('email', flat=True) if email != '']
+    if len(emails) > 0:
+        msg_html = render_to_string('email.html', {'title': title, 'content': message})
+        msg = EmailMessage(subject=subject, body=msg_html, from_email=DEFAULT_FROM_EMAIL, to=emails)
+        msg.content_subtype = 'html'
+        return msg.send()
