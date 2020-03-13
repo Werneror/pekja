@@ -34,11 +34,11 @@ SRC情报收集管理系统。
 不同格式的工具输出格式各不相同，支持一个工具便要有能解析该工具输出的`解析类`。
 目前支持的工具如下表所示。
 
-| 工具名| 收集的情报类型 | 解析类名 | 工具项目链接 |
-|:----:|:----:|:----:|:----:|
-| Nmap子域名爆破  | 域名 | NmapDnsBruteParser | [Nmap](https://nmap.org/) |
-| Nmap TCP端口扫描  | TCP端口 | NmapSynScanParser | [Nmap](https://nmap.org/) |
-| Nmap UDP端口扫描  | UDP端口 | NmapUdpScanParser | [Nmap](https://nmap.org/) |
+| 工具名| 收集的情报类型 | 解析类名 | 工具项目链接 | 版本 |
+|:----:|:----:|:----:|:----:|:----:|
+| Nmap子域名爆破  | 域名 | NmapDnsBruteParser | [Nmap](https://nmap.org/) | 7.7.0 |
+| Nmap TCP端口扫描  | TCP端口 | NmapSynScanParser | [Nmap](https://nmap.org/) | 7.7.0 |
+| Nmap UDP端口扫描  | UDP端口 | NmapUdpScanParser | [Nmap](https://nmap.org/) | 7.7.0 |
 
 
 ## 名词解释
