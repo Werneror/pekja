@@ -19,6 +19,7 @@ class Tool(models.Model):
     command = models.CharField(verbose_name='调用命令', max_length=500, validators=[command_validator])
     input_type = models.CharField(verbose_name='输入参数类型', max_length=50,
                                   choices=input_type_choices, default=INPUT_TYPE_FILE)
+    version = models.CharField(verbose_name='版本', max_length=50, null=True, blank=True)
     comment = models.CharField(verbose_name='备注', null=True, blank=True, max_length=100)
 
     def __str__(self):

@@ -19,6 +19,7 @@ class ToolResource(resources.ModelResource):
     command = fields.Field(column_name='调用命令', attribute='command')
     input_type = fields.Field(column_name='输入参数类型', attribute='input_type',
                               widget=ChoicesWidget(Tool.input_type_choices))
+    version = fields.Field(column_name='版本', attribute='version')
     comment = fields.Field(column_name='备注', attribute='comment')
 
     class Meta:

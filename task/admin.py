@@ -14,7 +14,7 @@ from .cron_task import set_cron_task
 
 @admin.register(Tool)
 class ToolAdmin(ImportExportActionModelAdmin):
-    list_display = ['name', 'link_url', 'type', 'parse_class_name', 'command', 'input_type']
+    list_display = ['name', 'link_url', 'version', 'type', 'parse_class_name', 'command', 'input_type']
     search_fields = ['name', 'command', 'comment']
     list_filter = ('type', 'input_type')
     resource_class = ToolResource
