@@ -21,6 +21,10 @@ def get_task_cron_comment(obj):
     return 'task-{}-pekja'.format(obj.id)
 
 
+def get_batch_task_cron_comment(obj):
+    return 'batch-task-{}-pekja'.format(obj.id)
+
+
 def get_windows_cron_file_path():
     cron_file_path = os.path.join(DATA_DIRS, 'windows_crontab.txt')
     if not os.path.exists(cron_file_path):

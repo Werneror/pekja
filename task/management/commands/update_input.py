@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from task.cron_task import update_input
+from task.cron_task import update_dynamic_input
 from pekja.utils import get_task_by_id
 
 
@@ -13,4 +13,4 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         task = get_task_by_id(options['task_id'])
         if task:
-            update_input(task)
+            update_dynamic_input(task)

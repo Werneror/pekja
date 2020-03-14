@@ -7,6 +7,7 @@ from pekja.widgets import ChoicesWidget
 from asset.models import Project
 from .models import Tool
 from .models import Task
+from .models import BatchTask
 
 
 class ToolResource(resources.ModelResource):
@@ -39,3 +40,23 @@ class TaskResource(resources.ModelResource):
     class Meta:
         model = Task
 
+
+class BatchTaskResource(resources.ModelResource):
+
+    id = fields.Field(column_name='ID', attribute='id')
+    name = fields.Field(column_name='任务名', attribute='name')
+    task1 = fields.Field(column_name='任务1', attribute='task1', widget=ForeignKeyWidget(Task, 'name'))
+    task2 = fields.Field(column_name='任务2', attribute='task2', widget=ForeignKeyWidget(Task, 'name'))
+    task3 = fields.Field(column_name='任务3', attribute='task3', widget=ForeignKeyWidget(Task, 'name'))
+    task4 = fields.Field(column_name='任务4', attribute='task4', widget=ForeignKeyWidget(Task, 'name'))
+    task5 = fields.Field(column_name='任务5', attribute='task5', widget=ForeignKeyWidget(Task, 'name'))
+    task6 = fields.Field(column_name='任务6', attribute='task6', widget=ForeignKeyWidget(Task, 'name'))
+    task7 = fields.Field(column_name='任务7', attribute='task7', widget=ForeignKeyWidget(Task, 'name'))
+    task8 = fields.Field(column_name='任务8', attribute='task8', widget=ForeignKeyWidget(Task, 'name'))
+    task9 = fields.Field(column_name='任务9', attribute='task9', widget=ForeignKeyWidget(Task, 'name'))
+    task10 = fields.Field(column_name='任务10', attribute='task10', widget=ForeignKeyWidget(Task, 'name'))
+    dispatch = fields.Field(column_name='调度', attribute='dispatch')
+    active = fields.Field(column_name='是否生效', attribute='active', widget=BooleanWidget())
+
+    class Meta:
+        model = BatchTask

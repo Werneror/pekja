@@ -7,6 +7,7 @@ from crontab import CronTab
 from pekja.utils import get_input_file_path
 from pekja.utils import get_output_file_path
 from pekja.utils import get_task_cron_comment
+from pekja.utils import get_batch_task_cron_comment
 from pekja.utils import get_windows_cron_file_path
 from pekja.settings import CRON_USER
 from pekja.settings import BASE_DIR
@@ -18,50 +19,55 @@ import parse
 
 def set_cron_task(obj):
     """
-    设置定时任务
+    设置任务的定时任务
     :param obj: Task 模型对象
     :return:
     """
-    input_file_path = get_input_file_path(obj)
-    output_file_path = get_output_file_path(obj)
-    task_cron_comment = get_task_cron_comment(obj)
+    command, comment = get_task_command(obj)
+    set_crontab(obj.dispatch, command, comment, obj.active)
 
-    if obj.tool.input_type == Tool.INPUT_TYPE_FILE:
-        if obj.input_file_type == Task.INPUT_FILE_TYPE_STATIC:
-            # 更新任务输入文件
-            with open(input_file_path, 'w', newline='') as f:
-                f.write(obj.input)
-        _input = input_file_path
+
+def set_cron_batch_task(obj):
+    """
+    设置批量任务的定时任务
+    :param obj:
+    :return:
+    """
+    commands = list()
+    for task in obj.get_tasks():
+        command, _ = get_task_command(task)
+        commands.append(command)
+    comment = get_batch_task_cron_comment(obj)
+    if len(commands) > 0:
+        set_crontab(obj.dispatch, ' && '.join(commands), comment, obj.active)
+
+
+def get_task_command(task):
+    """
+    获取任务的命令
+    :param task:
+    :return: command, comment
+    """
+    output_file_path = get_output_file_path(task)
+    task_cron_comment = get_task_cron_comment(task)
+
+    if task.tool.input_type == Tool.INPUT_TYPE_FILE:
+        if task.input_file_type == Task.INPUT_FILE_TYPE_STATIC:
+            _input = update_static_input(task)
+        else:
+            _input = update_dynamic_input(task)
     else:
-        _input = obj.input
+        _input = task.input
 
-    # 生成调用工具的命令
-    pre_command = '{} {} update_input {}'.format(executable, os.path.join(BASE_DIR, 'manage.py'), obj.id)
-    tool_command = obj.tool.command.replace('{input}', _input).replace('{output_file}', output_file_path)
-    parse_command = '{} {} parse {}'.format(executable, os.path.join(BASE_DIR, 'manage.py'), obj.id)
-    if obj.input_file_type == Task.INPUT_FILE_TYPE_DYNAMIC:
+    pre_command = '{} {} update_input {}'.format(executable, os.path.join(BASE_DIR, 'manage.py'), task.id)
+    tool_command = task.tool.command.replace('{input}', _input).replace('{output_file}', output_file_path)
+    parse_command = '{} {} parse {}'.format(executable, os.path.join(BASE_DIR, 'manage.py'), task.id)
+    if task.input_file_type == Task.INPUT_FILE_TYPE_DYNAMIC:
         command = ' && '.join([pre_command, tool_command, parse_command])
     else:
         command = ' && '.join([tool_command, parse_command])
 
-    # 打开定时任务文件
-    if system() == 'Windows':
-        cron = CronTab(tabfile=get_windows_cron_file_path())    # 仅用于调试
-    else:
-        cron = CronTab(user=CRON_USER)
-
-    # 删除该任务已存在的定时任务
-    for job in cron.find_comment(task_cron_comment):
-        cron.remove(job)
-    # 新建定时任务
-    job = cron.new(command=command, comment=task_cron_comment)
-    job.setall(obj.dispatch)
-    if obj.active:
-        job.enable()
-    else:
-        job.enable(False)
-    # 保存定时任务
-    cron.write()
+    return command, task_cron_comment
 
 
 def run_parse(task):
@@ -80,9 +86,9 @@ def run_parse(task):
         p.rename_file()
 
 
-def update_input(task):
+def update_dynamic_input(task):
     """
-    更新任务的输入
+    更新任务的动态输入
     :param task:
     :return:
     """
@@ -92,3 +98,46 @@ def update_input(task):
             for record in Record.objects.filter(project=task.project, type=task.input):
                 f.write(record.record)
                 f.write('\n')
+        return input_file_path
+
+
+def update_static_input(task):
+    """
+    更新任务的静态输入
+    :param task:
+    :return:
+    """
+    if task.input_file_type == Task.INPUT_FILE_TYPE_STATIC:
+        input_file_path = get_input_file_path(task)
+        with open(input_file_path, 'w', newline='') as f:
+            f.write(task.input)
+        return input_file_path
+
+
+def set_crontab(dispatch, command, comment, active):
+    """
+    设置定时任务
+    :param dispatch: 调度
+    :param command: 命令
+    :param comment: 备注，用于查找和更新命令
+    :param active: 是否生效
+    :return:
+    """
+    # 打开定时任务文件
+    if system() == 'Windows':
+        cron = CronTab(tabfile=get_windows_cron_file_path())  # 仅用于调试
+    else:
+        cron = CronTab(user=CRON_USER)
+    # 删除该任务已存在的定时任务
+    for job in cron.find_comment(comment):
+        cron.remove(job)
+    # 新建定时任务
+    job = cron.new(command=command, comment=comment)
+    job.setall(dispatch)
+    if active:
+        job.enable()
+    else:
+        job.enable(False)
+    # 保存定时任务
+    cron.write()
+
