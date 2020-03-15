@@ -57,6 +57,13 @@ pekja在Python 3.6.0下进行开发和测试。
 
 ### 使用Docker
 
+下载项目代码并进入项目目录：
+
+```bash
+git clone https://github.com/Werneror/pekja.git
+cd pekja
+```
+
 构建Docker容器：
 
 ```bash
@@ -66,6 +73,12 @@ docker build -t pekja .
 
 ```bash
 mkdir -p /opt/pekja
+```
+
+编辑文件`env`，按实际情况修改其中的配置：
+
+```bash
+vim env
 ```
 
 运行容器：
@@ -116,7 +129,7 @@ python manage.py createsuperuser
 还需按实际情况修改`pekja/settings.py`中的发送邮件相关的配置：
 
 ```Python
-EMAIL_HOST = 'smtp.ym.163.com'    # SMTP 服务器地址
+EMAIL_HOST = 'smtp.163.com'    # SMTP 服务器地址
 EMAIL_PORT = 994    # SMTP 服务端口
 EMAIL_USE_SSL = True    # 是否使用 SSl
 EMAIL_HOST_USER = 'pekja@werner.wiki'    # 发件邮箱（用户名）
