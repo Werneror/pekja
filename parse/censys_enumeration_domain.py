@@ -11,6 +11,6 @@ class CensysEnumerationDomain(Parser):
         with open(self.file_path) as f:
             output = json.loads(f.read())
         for domain in output:
-            sub_domains = domain.get('subdomains', list())
+            sub_domains = output[domain].get('subdomains', list())
             for sub_domain in sub_domains:
                 self.add_record(sub_domain)

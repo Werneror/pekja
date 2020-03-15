@@ -364,6 +364,7 @@ from .censys_enumeration_domain import CensysEnumerationDomain
 - 添加对更多工具的支持
 - 通过Docker部署
 - 编写Dashboard页面
+- 编写输入、输出查看页面
 - 合并邮件报告中同一项目为同一个单元格 
 
 
