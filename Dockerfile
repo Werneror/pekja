@@ -6,6 +6,11 @@ RUN apt-get update && apt-get upgrade -y
 RUN pip install -U pip setuptools -i https://pypi.tuna.tsinghua.edu.cn/simple
 RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
+# Install crontab
+RUN apt-get install -y cron
+RUN service cron start
+RUN update-rc.d cron defaults
+
 # Install tool: nmap 7.70
 RUN apt-get install -y nmap=7.70+dfsg1-6
 
