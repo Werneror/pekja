@@ -1,8 +1,8 @@
 import os
 
-from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
+from django.contrib.auth import get_user_model
 
 from pekja.settings import DEFAULT_FROM_EMAIL
 from pekja.settings import DATA_DIRS
@@ -55,7 +55,8 @@ def send_mail_to_users(subject, title, message):
     :param message:
     :return:
     """
-    emails = [email for email in User.objects.values_list('email', flat=True) if email != '']
+    user = get_user_model()
+    emails = [email for email in user.objects.values_list('email', flat=True) if email != '']
     if len(emails) > 0:
         msg_html = render_to_string('email.html', {'title': title, 'content': message})
         msg = EmailMessage(subject=subject, body=msg_html, from_email=DEFAULT_FROM_EMAIL, to=emails)
