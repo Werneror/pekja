@@ -39,6 +39,8 @@ SRC情报收集管理系统。
 | Nmap子域名爆破  | 域名 | NmapDnsBruteParser | [Nmap](https://nmap.org/) | 7.7.0 |
 | Nmap TCP端口扫描  | TCP端口 | NmapSynScanParser | [Nmap](https://nmap.org/) | 7.7.0 |
 | Nmap UDP端口扫描  | UDP端口 | NmapUdpScanParser | [Nmap](https://nmap.org/) | 7.7.0 |
+| Censys子域名采集  | 域名 | CensysEnumerationDomain | [censys-enumeration](https://github.com/0xbharath/censys-enumeration/) | 10d42fa3 |
+| Censys邮箱采集  | 邮箱 | CensysEnumerationEmail | [censys-enumeration](https://github.com/0xbharath/censys-enumeration/) | 10d42fa3 |
 
 
 ## 名词解释
@@ -277,6 +279,70 @@ python manage.py loaddata tool.json
 
 也可以在Web界面管理后台通过批量导出备份数据。
 
+
+## 高级
+
+### 新增对某工具的支持
+
+下面将以工具`Censys子域名采集`为例演示如何新增对某工具的支持。
+
+#### 安装和试运行
+
+工具`Censys子域名采集`使用的是[censys-enumeration](https://github.com/0xbharath/censys-enumeration/)，下载安装并尝试运行，
+弄清楚命令参数和输出文件格式，并获得输出文件样本。
+
+#### 创建输出解析类
+
+输出解析类必须是`parse.parser.Parser`的子类，该类的`file_path`是待解析文件（工具输出结果）的路径， 
+必须实现方法`parse`，在`parse`中需解析工具输出结果，并调用该类的`add_record`方法将解析出的结果保存到数据库中。
+`add_record`会处理记录重复问题，故在解析工具输出结果时不用特别处理重复的记录。
+
+`Censys子域名采集`的输出文件示例如下：
+
+```json
+{"testfire.net": {"domain": "testfire.net", "subdomains": ["demo.testfire.net", "ftp.testfire.net"]}}
+```
+
+下面将编写用于解析上述输出的解析类。在`parse`目录中创建文件`censys_enumeration_domain.py`，内容为：
+
+```python
+from .parser import Parser    # 导入解析类父类
+import json    # 这个工具的输出是json格式的，故导入json库
+
+
+class CensysEnumerationDomain(Parser):    # 类名会出现在工具表输出解析类下拉选项中
+    """python censys_enumeration.py --no-emails --outfile {output_file} {input}
+       for censys_enumeration.py 10d42fa3"""    # 建议写明工具调用命令和编写解析类时的工具版本
+
+    def parse(self):
+        with open(self.file_path) as f:
+            output = json.loads(f.read())    # 从待解析文件中读入数据
+        for domain in output:
+            sub_domains = domain.get('subdomains', list())
+            for sub_domain in sub_domains:
+                self.add_record(sub_domain)    # 将解析出的记录加入到数据库中
+```
+
+然后编辑`parse/__init__.py`，在末尾新增一行，引入刚刚编写的结果解析类：
+
+```python
+from .censys_enumeration_domain import CensysEnumerationDomain
+```
+
+#### 在工具表中添加工具
+
+进入到Web管理后台，在`工具表`中新增一个工具，各个字段填写的内容如下：
+
+- 工具名: Censys子域名采集
+- 项目地址: https://github.com/0xbharath/censys-enumeration/
+- 记录类型: 域名
+- 输出解析类: CensysEnumerationDomain
+- 调用命令: python censys_enumeration.py --no-emails --outfile {output_file} {input}（需特别注意命令路径）
+- 输入参数类型: 文件
+- 版本：10d42fa3（没有明确版本号的可以写commit ID）
+- 备注：留空
+
+添加完成后便可在任务中使用此工具。
 
 ## 常见问题
 

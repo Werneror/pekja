@@ -14,6 +14,11 @@ RUN update-rc.d cron defaults
 # Install tool: nmap 7.70
 RUN apt-get install -y nmap=7.70+dfsg1-6
 
+# Install censys-enumeration
+RUN mkdir -p /opt/censys_enumeration
+RUN git clone https://github.com/0xbharath/censys-enumeration.git /opt/censys_enumeration
+RUN pip install -r /opt/censys_enumeration/requirements.txt
+
 # Install pekja
 RUN mkdir -p /opt/pekja
 COPY requirements.txt /opt/pekja/requirements.txt
