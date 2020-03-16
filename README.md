@@ -57,7 +57,10 @@ pekja在Python 3.6.0下进行开发和测试。
 在Windows操作系统中可以成功运行Web服务，也可以添加任务。
 但只是将需要按时执行的命令写入到`data/windows_crontab.txt`文件中，并不会真正执行。
 
-### 使用Docker
+有两种安装方法，使用Docker安装或手工安装。手工安装时除了安装pekja外还需要逐个安装支持的工具，
+安装后还需要逐个核对、修改`工具表`中各个工具的`调用命令`（详情见后文），较为耗时耗力，故推荐使用Docker安装。
+
+### 方法一：使用Docker
 
 下载项目代码并进入项目目录：
 
@@ -77,7 +80,13 @@ docker build -t pekja .
 mkdir -p /opt/pekja
 ```
 
-编辑文件`env`，按实际情况修改其中的配置：
+复制配置文件：
+
+```bash
+cp env.example env
+```
+
+编辑配置文件`env`，按实际情况修改其中的配置：
 
 ```bash
 vim env
@@ -89,7 +98,7 @@ vim env
 docker run -d -p 8000:8000 --env-file env -v /opt/pekja:/opt/pekja/database --name pekja pekja:latest
 ```
 
-### 手动安装
+### 方法二：手动安装
 
 #### 安装pekja
 
@@ -362,9 +371,11 @@ from .censys_enumeration_domain import CensysEnumerationDomain
 ## 下一步计划
 
 - 添加对更多工具的支持
-- 通过Docker部署
 - 编写Dashboard页面
 - 编写输入、输出查看页面
+- 编写Crontab查看页面
+- 编写设置邮件报告发送时间的页面
+- 解决Docker中时区不对的问题
 - 合并邮件报告中同一项目为同一个单元格 
 
 

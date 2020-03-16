@@ -43,7 +43,7 @@ class ToolAdmin(ImportExportActionModelAdmin):
 
 @admin.register(Task)
 class TaskAdmin(ImportExportActionModelAdmin):
-    list_display = ['name', 'project', 'tool', 'input_overview', 'dispatch', 'active']
+    list_display = ['id', 'name', 'project', 'tool', 'input_overview', 'dispatch', 'active']
     search_fields = ['name', 'input']
     list_filter = ('project', 'tool', 'active')
     resource_class = TaskResource
@@ -65,8 +65,8 @@ class TaskAdmin(ImportExportActionModelAdmin):
 
 @admin.register(BatchTask)
 class BatchTaskAdmin(ImportExportActionModelAdmin):
-    list_display = ['name', 'task1', 'task2', 'task3', 'task4', 'task5', 'task6', 'task7', 'task8', 'task9', 'task10',
-                    'dispatch', 'active']
+    list_display = ['id', 'name', 'task1', 'task2', 'task3', 'task4', 'task5', 'task6', 'task7', 'task8', 'task9',
+                    'task10', 'dispatch', 'active']
     search_fields = ['name']
     list_filter = ('active', )
     resource_class = BatchTaskResource
