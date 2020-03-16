@@ -1,8 +1,6 @@
-from tabulate import tabulate
-
-
 from asset.models import Record
 from pekja.utils import send_mail_to_users
+from pekja.utils import rowspan_html_table
 
 
 def generate_new_record_report(date):
@@ -26,8 +24,7 @@ def generate_new_record_report(date):
         for record_type in data[project]:
             table_data.append([project, record_type, data[project][record_type]])
 
-    return tabulate(table_data, headers=['Project', 'Type', 'Amount'], tablefmt='html',
-                    colalign=('center', 'center', 'center')).replace('<table>', '<table border="1" cellspacing="0">')
+    return rowspan_html_table(['Project', 'Type', 'Amount'], data)
 
 
 def send_report_by_mail(date, report):

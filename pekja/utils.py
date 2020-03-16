@@ -62,3 +62,27 @@ def send_mail_to_users(subject, title, message):
         msg = EmailMessage(subject=subject, body=msg_html, from_email=DEFAULT_FROM_EMAIL, to=emails)
         msg.content_subtype = 'html'
         return msg.send()
+
+
+def rowspan_html_table(headers, input_dict):
+    """
+    将输入的字典转换为HTML表格
+    :param headers:
+    :param input_dict:
+    :return:
+    """
+    table = '<table border="1" cellspacing="0"><thead><tr>'
+    for header in headers:
+        table += '<th style="text-align: center;">' + header + '</th>'
+    table += '</tr></thead>'
+    for key in input_dict:
+        for index, sub_key in enumerate(input_dict[key]):
+            row = '<tr>'
+            if index == 0:
+                row += '<td rowspan="{}" style="text-align: center;">'.format(len(input_dict[key])) + key + '</td>'
+            row += '<td style="text-align: center;">' + sub_key + '</td>'
+            row += '<td style="text-align: center;">' + str(input_dict[key][sub_key]) + '</td>'
+            row += '</tr>'
+            table += row
+    table += '</table>'
+    return table

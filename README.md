@@ -376,7 +376,6 @@ from .censys_enumeration_domain import CensysEnumerationDomain
 - 编写Crontab查看页面
 - 编写设置邮件报告发送时间的页面
 - 解决Docker中时区不对的问题
-- 合并邮件报告中同一项目为同一个单元格 
 
 
 ## 类似项目
