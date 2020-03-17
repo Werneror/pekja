@@ -17,10 +17,10 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import include
 
-import asset.urls
+import layuimini.urls
 
 
 urlpatterns = [
-    path('', include(asset.urls)),
+    path('', include(layuimini.urls)),
     path('admin/', admin.site.urls),
 ]

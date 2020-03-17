@@ -1,0 +1,73 @@
+{
+  "homeInfo": {
+    "title": "首页",
+    "href": "/page/dashboard/"
+  },
+  "logoInfo": {
+    "title": "pekja",
+    "image": "/static/layuimini/images/logo.png",
+    "href": ""
+  },
+  "menuInfo": [
+    {
+      "title": "数据展示",
+      "icon": "fa fa-home",
+      "href": "",
+      "target": "_self",
+      "child": [
+        {
+          "title": "数据面板",
+          "icon": "fa fa-tachometer",
+          "href": "/page/dashboard/",
+          "target": "_self"
+        },
+        {
+          "title": "时间线",
+          "icon": "fa fa-heartbeat",
+          "href": "/page/timeline/",
+          "target": "_self"
+        }
+      ]
+    },
+    {
+      "title": "系统设置",
+      "icon": "fa fa-gears",
+      "href": "",
+      "target": "_self",
+      "child": [
+        {
+          "title": "邮件报告",
+          "icon": "fa fa-envelope",
+          "href": "/page/email_report/",
+          "target": "_self"
+        }
+      ]
+    },
+    {
+      "title": "高级调试",
+      "icon": "fa fa-bug",
+      "href": "",
+      "target": "_self",
+      "child": [
+        {
+          "title": "Crontab",
+          "icon": "fa fa-calendar",
+          "href": "/page/crontab/",
+          "target": "_self"
+        },
+        {
+          "title": "Input",
+          "icon": "fa fa-hourglass-start",
+          "href": "/page/input/",
+          "target": "_self"
+        },
+        {
+          "title": "Output",
+          "icon": "fa fa-hourglass-end",
+          "href": "/page/output/",
+          "target": "_self"
+        }
+      ]
+    }
+  ]
+}
