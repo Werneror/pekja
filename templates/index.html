@@ -14,9 +14,8 @@
     <meta name="format-detection" content="telephone=no">{% load static %}
     <link rel="icon" href="{% static 'layuimini/images/favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'layuimini/lib/layui-v2.5.5/css/layui.css' %}" media="all">
-    <link rel="stylesheet" href="{% static 'layuimini/lib/font-awesome-4.7.0/css/font-awesome.min.css' %}" media="all">
     <link rel="stylesheet" href="{% static 'layuimini/css/layuimini.css' %}" media="all">
-    <link rel="stylesheet" href="{% static 'layuimini/css/public.css' %}" media="all">
+    <link rel="stylesheet" href="{% static 'layuimini/lib/font-awesome-4.7.0/css/font-awesome.min.css' %}" media="all">
     <!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
@@ -28,7 +27,7 @@
 <div class="layui-layout layui-layout-admin">
 
     <div class="layui-header header">
-        <div class="layui-logo layuimini-logo layuimini-back-home"></div>
+        <div class="layui-logo layuimini-logo"></div>
 
         <div class="layuimini-header-content">
             <a>
@@ -51,13 +50,13 @@
             <ul class="layui-nav layui-layout-right">
 
                 <li class="layui-nav-item" lay-unselect>
-                    <a href="javascript:;" data-refresh="刷新" title="刷新"><i class="fa fa-refresh"></i></a>
+                    <a href="javascript:;" data-refresh="刷新"><i class="fa fa-refresh"></i></a>
                 </li>
                 <!--<li class="layui-nav-item" lay-unselect>
-                    <a href="javascript:;" data-clear="清理" title="清除缓存" class="layuimini-clear"><i class="fa fa-trash-o"></i></a>
+                    <a href="javascript:;" data-clear="清理" class="layuimini-clear"><i class="fa fa-trash-o"></i></a>
                 </li>-->
                 <li class="layui-nav-item mobile layui-hide-xs" lay-unselect>
-                    <a href="javascript:;" data-check-screen="full" title="全屏"><i class="fa fa-arrows-alt"></i></a>
+                    <a href="javascript:;" data-check-screen="full"><i class="fa fa-arrows-alt"></i></a>
                 </li>
                 <li class="layui-nav-item layuimini-setting">
                     <a href="javascript:;">{{ user_name }}</a>
@@ -97,15 +96,29 @@
 
     <div class="layui-body">
 
-        <div class="layui-card layuimini-page-header layui-hide">
-            <div class="layui-breadcrumb layuimini-page-title">
-                <a lay-href="" href="/">主页</a><span lay-separator="">/</span>
-                <a><cite>常规管理</cite></a><span lay-separator="">/</span>
-                <a><cite>系统设置</cite></a>
+        <div class="layuimini-tab layui-tab-rollTool layui-tab" lay-filter="layuiminiTab" lay-allowclose="true">
+            <ul class="layui-tab-title">
+                <li class="layui-this" id="layuiminiHomeTabId" lay-id=""></li>
+            </ul>
+            <div class="layui-tab-control">
+                <li class="layuimini-tab-roll-left layui-icon layui-icon-left"></li>
+                <li class="layuimini-tab-roll-right layui-icon layui-icon-right"></li>
+                <li class="layui-tab-tool layui-icon layui-icon-down">
+                    <ul class="layui-nav close-box">
+                        <li class="layui-nav-item">
+                            <a href="javascript:;"><span class="layui-nav-more"></span></a>
+                            <dl class="layui-nav-child">
+                                <dd><a href="javascript:;" layuimini-tab-close="current">关 闭 当 前</a></dd>
+                                <dd><a href="javascript:;" layuimini-tab-close="other">关 闭 其 他</a></dd>
+                                <dd><a href="javascript:;" layuimini-tab-close="all">关 闭 全 部</a></dd>
+                            </dl>
+                        </li>
+                    </ul>
+                </li>
             </div>
-        </div>
-
-        <div class="layuimini-content-page">
+            <div class="layui-tab-content">
+                <div id="layuiminiHomeTabIframe" class="layui-tab-item layui-show"></div>
+            </div>
         </div>
 
     </div>
@@ -123,22 +136,15 @@
         var options = {
             iniUrl: "{% static 'layuimini/config/init.json' %}",    // 初始化接口
             clearUrl: "api/clear/", // 缓存清理接口
-            renderPageVersion: true,    // 初始化页面是否加版本号
+            urlHashLocation: true,      // 是否打开hash定位
             bgColorDefault: 8,          // 主题默认配置
             multiModule: false,          // 是否开启多模块
             menuChildOpen: true,       // 是否默认展开菜单
             loadingTime: 0,             // 初始化加载时间
-            pageAnim: true,             // 切换菜单动画
+            pageAnim: true,             // iframe窗口动画
+            maxTabNum: 20,              // 最大的tab打开数量
         };
         miniAdmin.render(options);
-
-        // 百度统计代码，只统计指定域名
-        miniTongji.render({
-            specific: true,
-            domains: [
-                'pekja.werner.wiki',
-            ],
-        });
     });
 </script>
 </body>

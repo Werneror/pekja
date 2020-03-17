@@ -1,7 +1,7 @@
 {
   "homeInfo": {
     "title": "首页",
-    "href": "/page/dashboard/"
+    "href": "page/dashboard/"
   },
   "logoInfo": {
     "title": "pekja",
@@ -18,13 +18,13 @@
         {
           "title": "数据面板",
           "icon": "fa fa-tachometer",
-          "href": "/page/dashboard/",
+          "href": "page/dashboard/",
           "target": "_self"
         },
         {
           "title": "时间线",
           "icon": "fa fa-heartbeat",
-          "href": "/page/timeline/",
+          "href": "page/timeline/",
           "target": "_self"
         }
       ]
@@ -38,7 +38,7 @@
         {
           "title": "邮件报告",
           "icon": "fa fa-envelope",
-          "href": "/page/email_report/",
+          "href": "page/email_report/",
           "target": "_self"
         }
       ]
@@ -52,19 +52,19 @@
         {
           "title": "Crontab",
           "icon": "fa fa-calendar",
-          "href": "/page/crontab/",
+          "href": "page/crontab/",
           "target": "_self"
         },
         {
           "title": "Input",
           "icon": "fa fa-hourglass-start",
-          "href": "/page/input/",
+          "href": "page/input/",
           "target": "_self"
         },
         {
           "title": "Output",
           "icon": "fa fa-hourglass-end",
-          "href": "/page/output/",
+          "href": "page/output/",
           "target": "_self"
         }
       ]

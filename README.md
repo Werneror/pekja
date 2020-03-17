@@ -371,7 +371,6 @@ from .censys_enumeration_domain import CensysEnumerationDomain
 ## 下一步计划
 
 - 添加对更多工具的支持
-- 编写Dashboard页面
 - 编写输入、输出查看页面
 - 编写Crontab查看页面
 - 编写设置邮件报告发送时间的页面

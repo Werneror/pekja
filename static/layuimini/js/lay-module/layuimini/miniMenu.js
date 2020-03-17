@@ -128,7 +128,6 @@ layui.define(["element", "jquery"], function (exports) {
                 headerMenuCheckDefault = '';
                 leftMenuCheckDefault = 'layui-hide';
             });
-
             $('.layui-layout-body').addClass('layuimini-multi-module'); //多模块标识
             $('.layuimini-menu-header-pc').html(headerMenuHtml); //电脑
             $('.layuimini-menu-header-mobile').html(headerMobileMenuHtml); //手机
