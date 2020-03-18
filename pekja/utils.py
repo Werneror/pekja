@@ -1,4 +1,5 @@
 import os
+from html import escape
 
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
@@ -73,15 +74,15 @@ def rowspan_html_table(headers, input_dict):
     """
     table = '<table border="1" cellspacing="0"><thead><tr>'
     for header in headers:
-        table += '<th style="text-align: center;">' + header + '</th>'
+        table += '<th style="text-align: center;">' + escape(header) + '</th>'
     table += '</tr></thead>'
     for key in input_dict:
         for index, sub_key in enumerate(input_dict[key]):
             row = '<tr>'
             if index == 0:
                 row += '<td rowspan="{}" style="text-align: center;">'.format(len(input_dict[key])) + key + '</td>'
-            row += '<td style="text-align: center;">' + sub_key + '</td>'
-            row += '<td style="text-align: center;">' + str(input_dict[key][sub_key]) + '</td>'
+            row += '<td style="text-align: center;">' + escape(sub_key) + '</td>'
+            row += '<td style="text-align: center;">' + escape(str(input_dict[key][sub_key])) + '</td>'
             row += '</tr>'
             table += row
     table += '</table>'

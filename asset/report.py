@@ -1,3 +1,4 @@
+# coding:utf-8
 from asset.models import Record
 from pekja.utils import send_mail_to_users
 from pekja.utils import rowspan_html_table
@@ -24,7 +25,7 @@ def generate_new_record_report(date):
         for record_type in data[project]:
             table_data.append([project, record_type, data[project][record_type]])
 
-    return rowspan_html_table(['Project', 'Type', 'Amount'], data)
+    return rowspan_html_table(['项目', '类型', '数量'], data)
 
 
 def send_report_by_mail(date, report):
@@ -34,5 +35,5 @@ def send_report_by_mail(date, report):
     :param report: HTML
     :return:
     """
-    title = 'The new record report of Pekja is shown in the following table.'
-    send_mail_to_users('Pekja report for {}'.format(date.strftime('%Y-%m-%d')), title, report)
+    send_mail_to_users('【pekja】{}新增记录报告'.format(date.strftime('%Y-%m-%d')),
+                       '{}新增记录见下表。'.format(date.strftime('%Y-%m-%d')), report)
