@@ -9,7 +9,7 @@ def cron_validator(value):
     :return:
     """
     if not CronSlices.is_valid(value):
-        raise ValidationError('不是有效的Cron表达式')
+        raise ValidationError('不是有效的Crontab表达式')
 
 
 def command_validator(value):

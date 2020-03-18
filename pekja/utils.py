@@ -52,6 +52,16 @@ def get_task_by_id(task_id):
         return task
 
 
+def get_user_emails():
+    """
+    获取所有用户的邮箱地址
+    :return:
+    """
+    user = get_user_model()
+    emails = [email for email in user.objects.values_list('email', flat=True) if email != '']
+    return emails
+
+
 def send_mail_to_users(subject, title, message):
     """
     给所有用户发送邮件
@@ -60,8 +70,7 @@ def send_mail_to_users(subject, title, message):
     :param message:
     :return:
     """
-    user = get_user_model()
-    emails = [email for email in user.objects.values_list('email', flat=True) if email != '']
+    emails = get_user_emails()
     if len(emails) > 0:
         msg_html = render_to_string('email.html', {'title': title, 'content': message})
         msg = EmailMessage(subject=subject, body=msg_html, from_email=DEFAULT_FROM_EMAIL, to=emails)

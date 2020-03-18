@@ -28,10 +28,10 @@
     <div class="layuimini-main layui-top-box">
         <div class="layui-row layui-col-space10">
 
-            <div class="layui-col-md10">
-                <fieldset class="layui-elem-field layui-field-title">
-                    <legend>时间线</legend>
-                </fieldset>
+            <div class="layui-col-md9">
+              <fieldset class="layui-elem-field layui-field-title">
+                <legend>时间线</legend>
+              </fieldset>
               <ul class="layui-timeline">
                 {% for record in records %}
                 <li class="layui-timeline-item">
@@ -71,7 +71,10 @@
               </div>
             </div>
 
-            <div class="layui-col-md2">
+            <div class="layui-col-md3">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>过滤</legend>
+                </fieldset>
                 <form class="layui-form" action="">
                   <div class="layui-form-item">
                     <label class="layui-form-label">项目名</label>

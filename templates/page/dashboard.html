@@ -160,7 +160,6 @@
             if (data.code != 0) {
                 layer.msg('曲线图数据加载失败！');
             } else {
-                console.log(data);
                 var series = new Array();
                 for (key in data.msg.data) {
                     series.push(
@@ -171,7 +170,6 @@
                         }
                     );
                 }
-                console.log(series);
                 var optionRecords = {
                     tooltip: {
                         trigger: 'axis'

@@ -1,5 +1,9 @@
 # coding:utf-8
+import os
 import datetime
+from sys import executable
+
+from crontab import CronSlices
 
 from django.shortcuts import render
 from django.shortcuts import redirect
@@ -11,51 +15,15 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.views.decorators.clickjacking import xframe_options_sameorigin
 
+from pekja.settings import BASE_DIR
 from pekja.utils import open_crontab
+from pekja.utils import get_user_emails
 from asset.models import Record
 from asset.models import Project
 from task.models import Tool
 from task.models import Task
 from task.models import BatchTask
-
-
-@login_required(login_url='/login/')
-def timeline(request):
-    try:
-        page = int(request.GET.get('page', default=1))
-    except ValueError:
-        page = 1
-    try:
-        limit = int(request.GET.get('limit', default=10))
-    except ValueError:
-        limit = 10
-    project = request.GET.get('project', default='')
-    record_type = request.GET.get('type', default='')
-
-    if project != '':
-        records = Record.objects.filter(project__name=project).order_by('-add_time')
-    else:
-        records = Record.objects.all().order_by('-add_time')
-    if record_type != '':
-        records = records.filter(type=record_type)
-
-    _records = dict()
-    for record in records:
-        add_date = record.add_time.strftime('%Y-%m-%d')
-        if add_date not in _records:
-            _records[add_date] = list()
-        _records[add_date].append(record)
-
-    records = [{'date': key, 'contents': _records[key]} for key in _records]
-    context = {
-        'records': records[(page-1)*limit: page*limit],
-        'disabled_pre_page': True if page == 1 else False,
-        'pre_page': page-1,
-        'disabled_next_page': True if page*limit > len(records) else False,
-        'next_page': page+1,
-        'project': project,
-    }
-    return render(request, 'timeline.html', context)
+from task.cron_task import set_crontab
 
 
 @login_required(login_url='/login/')
@@ -125,15 +93,14 @@ def dashboard(request):
 @login_required(login_url='/login/')
 @xframe_options_sameorigin
 def timeline(request):
-    print(request.POST)
     try:
         page = int(request.GET.get('page', default=1))
     except ValueError:
         page = 1
     try:
-        limit = int(request.GET.get('limit', default=10))
+        limit = int(request.GET.get('limit', default=3))
     except ValueError:
-        limit = 10
+        limit = 3
     project = request.GET.get('project', default='')
     record_type = request.GET.get('type', default='')
 
@@ -156,7 +123,7 @@ def timeline(request):
         'records': records[(page-1)*limit: page*limit],
         'disabled_pre_page': True if page == 1 else False,
         'pre_page': page-1,
-        'disabled_next_page': True if page*limit > len(records) else False,
+        'disabled_next_page': True if page*limit >= len(records) else False,
         'next_page': page+1,
         'project': project,
     }
@@ -171,3 +138,27 @@ def crontab(request):
         jobs.append(job.__str__())
     return render(request, 'page/crontab.html', {'crontab': '\n'.join(jobs),
                                                  'time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')})
+
+
+@login_required(login_url='/login/')
+@xframe_options_sameorigin
+def email_report(request):
+    error_msg = str()
+    comment = '#send-mail-report-pekja'
+    command = '{} {} record_report'.format(executable, os.path.join(BASE_DIR, 'manage.py'))
+    if request.method == 'POST':
+        dispatch = request.POST.get('dispatch')
+        if CronSlices.is_valid(dispatch):
+            set_crontab(dispatch, command, comment, True)
+        else:
+            error_msg = '不是有效的Crontab表达式'
+    emails = get_user_emails()
+    cron = open_crontab()
+    jobs = list()
+    for job in cron.find_comment(comment):
+        jobs.append(job.__str__())
+    return render(request, 'page/email_report_setting.html', {'error_msg': error_msg, 'emails': emails,
+                                                              'crontab': '\n'.join(jobs),
+                                                              'time': datetime.datetime.now().strftime(
+                                                                  '%Y-%m-%d %H:%M:%S')
+                                                              })
