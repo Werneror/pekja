@@ -1,5 +1,8 @@
 import os
 from html import escape
+from platform import system
+
+from crontab import CronTab
 
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
@@ -7,6 +10,7 @@ from django.contrib.auth import get_user_model
 
 from pekja.settings import DEFAULT_FROM_EMAIL
 from pekja.settings import DATA_DIRS
+from pekja.settings import CRON_USER
 from task.models import Task
 
 
@@ -87,3 +91,15 @@ def rowspan_html_table(headers, input_dict):
             table += row
     table += '</table>'
     return table
+
+
+def open_crontab():
+    """
+    打开crontab
+    :return:
+    """
+    if system() == 'Windows':
+        cron = CronTab(tabfile=get_windows_cron_file_path())  # 仅用于调试
+    else:
+        cron = CronTab(user=CRON_USER)
+    return cron

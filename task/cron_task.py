@@ -1,6 +1,5 @@
 import os
 from sys import executable
-from platform import system
 
 from crontab import CronTab
 
@@ -9,7 +8,7 @@ from pekja.utils import get_output_file_path
 from pekja.utils import get_task_cron_comment
 from pekja.utils import get_batch_task_cron_comment
 from pekja.utils import get_windows_cron_file_path
-from pekja.settings import CRON_USER
+from pekja.utils import open_crontab
 from pekja.settings import BASE_DIR
 from task.models import Tool
 from task.models import Task
@@ -124,10 +123,7 @@ def set_crontab(dispatch, command, comment, active):
     :return:
     """
     # 打开定时任务文件
-    if system() == 'Windows':
-        cron = CronTab(tabfile=get_windows_cron_file_path())  # 仅用于调试
-    else:
-        cron = CronTab(user=CRON_USER)
+    cron = open_crontab()
     # 删除该任务已存在的定时任务
     for job in cron.find_comment(comment):
         cron.remove(job)

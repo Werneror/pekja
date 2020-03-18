@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.views.decorators.clickjacking import xframe_options_sameorigin
 
+from pekja.utils import open_crontab
 from asset.models import Record
 from asset.models import Project
 from task.models import Tool
@@ -160,3 +161,13 @@ def timeline(request):
         'project': project,
     }
     return render(request, 'page/timeline.html', context)
+
+
+@login_required(login_url='/login/')
+@xframe_options_sameorigin
+def crontab(request):
+    jobs = list()
+    for job in open_crontab():
+        jobs.append(job.__str__())
+    return render(request, 'page/crontab.html', {'crontab': '\n'.join(jobs),
+                                                 'time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')})

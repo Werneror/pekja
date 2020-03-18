@@ -10,4 +10,5 @@ urlpatterns = [
     path('api/graph/', views.api_graph, name='api_graph'),
     path('page/dashboard/', views.dashboard, name='dashboard'),
     path('page/timeline/', views.timeline, name='timeline'),
+    path('page/crontab/', views.crontab, name='crontab'),
 ]
