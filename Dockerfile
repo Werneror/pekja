@@ -22,7 +22,7 @@ RUN pip install -r /opt/censys_enumeration/requirements.txt
 # Install CTFR
 RUN mkdir -p /opt/ctfr
 RUN git clone https://github.com/UnaPibaGeek/ctfr.git /opt/ctfr
-RUN pip3 install -r /opt/ctfr/requirements.txt
+RUN pip install -r /opt/ctfr/requirements.txt
 
 # Install pekja
 RUN mkdir -p /opt/pekja

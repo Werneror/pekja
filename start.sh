@@ -1,5 +1,6 @@
 #!/bin/bash
 
+service cron start
 python manage.py migrate --noinput
 python manage.py init_admin
 python manage.py loaddata tool.json

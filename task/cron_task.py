@@ -1,13 +1,10 @@
 import os
 from sys import executable
 
-from crontab import CronTab
-
 from pekja.utils import get_input_file_path
 from pekja.utils import get_output_file_path
 from pekja.utils import get_task_cron_comment
 from pekja.utils import get_batch_task_cron_comment
-from pekja.utils import get_windows_cron_file_path
 from pekja.utils import open_crontab
 from pekja.settings import BASE_DIR
 from task.models import Tool
