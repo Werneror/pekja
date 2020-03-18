@@ -229,3 +229,15 @@ def input_file(request):
 @xframe_options_sameorigin
 def output_file(request):
     return render(request, 'page/show_file.html', {'api_path': '/api/output_file/'})
+
+
+@login_required(login_url='/login/')
+@xframe_options_sameorigin
+def var_mail(request):
+    if os.path.exists(os.path.join('/var', 'mail', 'mail')):
+        with open(os.path.join('/var', 'mail', 'mail')) as f:
+            mail = f.read()
+    else:
+        mail = '/var/mail/mail不存在'
+    return render(request, 'page/var_mail.html', {'mail': mail,
+                                                  'time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')})

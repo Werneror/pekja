@@ -17,4 +17,5 @@ urlpatterns = [
     path('page/email_report/', views.email_report, name='email_report'),
     path('page/input/', views.input_file, name='input_file'),
     path('page/output/', views.output_file, name='output_file'),
+    path('page/mail/', views.var_mail, name='var_mail'),
 ]

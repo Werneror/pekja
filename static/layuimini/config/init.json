@@ -66,6 +66,12 @@
           "icon": "fa fa-hourglass-end",
           "href": "page/output/",
           "target": "_self"
+        },
+        {
+          "title": "Mail",
+          "icon": "fa fa-envelope-o",
+          "href": "page/mail/",
+          "target": "_self"
         }
       ]
     }
