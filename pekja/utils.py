@@ -112,3 +112,20 @@ def open_crontab():
     else:
         cron = CronTab(user=CRON_USER)
     return cron
+
+
+def human_size(size):
+    def str_of_size(integer, remainder, level):
+        if integer >= 1024:
+            remainder = integer % 1024
+            integer //= 1024
+            level += 1
+            return str_of_size(integer, remainder, level)
+        else:
+            return integer, remainder, level
+
+    units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
+    integer, remainder, level = str_of_size(size, 0, 0)
+    if level + 1 > len(units):
+        level = -1
+    return '{}.{:>02d} {}'.format(integer, remainder, units[level])

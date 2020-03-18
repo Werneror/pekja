@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>文件查看</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">{% load static %}
+    <link rel="icon" href="{% static 'layuimini/images/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'layuimini/lib/layui-v2.5.5/css/layui.css' %}" media="all">
+    <link rel="stylesheet" href="{% static 'layuimini/css/layuimini.css' %}" media="all">
+    <link rel="stylesheet" href="{% static 'layuimini/lib/font-awesome-4.7.0/css/font-awesome.min.css' %}" media="all">
+    <style>
+        .layui-top-box {padding:40px 20px 20px 20px;}
+        .panel {margin-bottom:17px;background-color:#fff;border:1px solid transparent;border-radius:3px;-webkit-box-shadow:0 1px 1px rgba(0,0,0,.05);box-shadow:0 1px 1px rgba(0,0,0,.05)}
+        .panel-body {padding:15px}
+        .panel-title {margin-top:0;margin-bottom:0;font-size:14px;color:inherit;}
+        .label {display:inline;padding:.2em .6em .3em;font-size:75%;font-weight:700;line-height:1;color:#fff;text-align:center;white-space:nowrap;vertical-align:baseline;border-radius:.25em;margin-top: .3em;}
+        .layui-red {color:red}
+        .main_btn > p {height:40px;}
+        .amount {font-size:400%;margin-top:10px;margin-bottom:10px;text-align:center;}
+    </style>
+</head>
+<body>
+<div class="layuimini-container">
+<div class="layuimini-main">
+<div class="layuimini-container layuimini-page-anim">
+    <div class="layuimini-main layui-top-box">
+        <div class="layui-row layui-col-space10">
+            <div class="layui-col-md12">
+                <table id="file-table" lay-filter="file"></table>
+                <script type="text/html" id="file-table-toolbar">
+                    <form class="layui-form">
+                        <div class="filter-form">
+                          按任务ID过滤：
+                          <div class="layui-inline">
+                            <input class="layui-input" name="task_id" id="task-id" autocomplete="off">
+                          </div>
+                          <div class="layui-btn"  lay-submit lay-filter="filter-task">过滤</div>
+                        </div>
+                    </form>
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<script src="{% static 'layuimini/lib/layui-v2.5.5/layui.js' %}" charset="utf-8"></script>
+<script src="{% static 'layuimini/js/lay-config.js' %}" charset="utf-8"></script>
+<script>
+layui.use(['table', 'form'], function(){
+  var form = layui.form;
+  var table = layui.table;
+  var fileTable = table.render({
+    id: 'file-table'
+    ,elem: '#file-table'
+    ,url: '{{ api_path }}' //数据接口
+    ,page: true //开启分页
+    ,toolbar: '#file-table-toolbar'
+    ,cols: [[ //表头
+      {field: 'file_name', title: '文件名', width:300, sort: true, align: 'center'}
+      ,{field: 'size', title: '文件大小', width:180, sort:true, align: 'center'}
+      ,{field: 'modify_time', title: '修改时间', width:180, sort: true, align: 'center'}
+      ,{field: 'download', title: '查看', width:180, align: 'center', templet: function(d){
+        return '<a href="/download/' + d.file_name + '" target="_blank">点击查看</a>';
+      }}
+    ]]
+  });
+
+    form.on('submit(filter-task)', function(data){
+        fileTable.reload({
+            page: {
+              curr: 1 //重新从第 1 页开始
+            }
+            ,where: {
+                task_id: data.field.task_id
+            }
+            ,done: function(res, curr, count) {
+                this.where = {};
+            }
+        });
+      return false;
+    });
+
+});
+</script>
+</body>
+</html>

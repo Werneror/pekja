@@ -1,5 +1,6 @@
 # coding:utf-8
 import os
+import time
 import datetime
 from sys import executable
 
@@ -13,11 +14,15 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import get_user
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.http import FileResponse
+from django.http import HttpResponseNotFound
 from django.views.decorators.clickjacking import xframe_options_sameorigin
 
 from pekja.settings import BASE_DIR
+from pekja.settings import DATA_DIRS
 from pekja.utils import open_crontab
 from pekja.utils import get_user_emails
+from pekja.utils import human_size
 from asset.models import Record
 from asset.models import Project
 from task.models import Tool
@@ -49,6 +54,15 @@ def user_logout(request):
 
 
 @login_required(login_url='/login/')
+def download(request, file_name):
+    if os.path.exists(os.path.join(DATA_DIRS, file_name)):
+        file = open(os.path.join(DATA_DIRS, file_name), 'rb')
+        return FileResponse(file)
+    else:
+        return HttpResponseNotFound()
+
+
+@login_required(login_url='/login/')
 def api_clear(request):
     return JsonResponse({'code': 1, 'msg': 'The server cleared the cache successfully'})
 
@@ -72,6 +86,47 @@ def api_graph(request):
         date += datetime.timedelta(days=1)
     data.update({'总计': amount})
     return JsonResponse({'code': 0, 'msg': {'data': data, 'date_list': date_list}})
+
+
+@login_required(login_url='/login/')
+def api_input_file(request):
+    task_id = request.GET.get('task_id')
+    if task_id:
+        return api_data_file(request, 'input-{}.'.format(task_id))
+    else:
+        return api_data_file(request, 'input-')
+
+
+@login_required(login_url='/login/')
+def api_output_file(request):
+    task_id = request.GET.get('task_id')
+    if task_id:
+        return api_data_file(request, 'output-{}-'.format(task_id))
+    else:
+        return api_data_file(request, 'output-')
+
+
+def api_data_file(request, prefix):
+    try:
+        page = int(request.GET.get('page', 1))
+    except ValueError:
+        page = 1
+    try:
+        limit = int(request.GET.get('limit', 10))
+    except ValueError:
+        limit = 10
+    data = list()
+    for path, dir_list, file_list in os.walk(DATA_DIRS):
+        for file_name in file_list:
+            if file_name.startswith(prefix):
+                size = os.path.getsize(os.path.join(path, file_name))
+                modify_time = time.localtime(os.stat(os.path.join(path, file_name)).st_mtime)
+                data.append({
+                    'file_name': file_name,
+                    'size': human_size(size),
+                    'modify_time': time.strftime('%Y-%m-%d %H:%M:%S', modify_time)
+                })
+    return JsonResponse({'code': 0, 'msg': '', 'count': len(data), 'data': data[(page-1)*limit: page*limit]})
 
 
 @login_required(login_url='/login/')
@@ -162,3 +217,15 @@ def email_report(request):
                                                               'time': datetime.datetime.now().strftime(
                                                                   '%Y-%m-%d %H:%M:%S')
                                                               })
+
+
+@login_required(login_url='/login/')
+@xframe_options_sameorigin
+def input_file(request):
+    return render(request, 'page/show_file.html', {'api_path': '/api/input_file/'})
+
+
+@login_required(login_url='/login/')
+@xframe_options_sameorigin
+def output_file(request):
+    return render(request, 'page/show_file.html', {'api_path': '/api/output_file/'})
