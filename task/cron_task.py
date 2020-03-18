@@ -131,6 +131,17 @@ def set_crontab(dispatch, command, comment, active):
         job.enable()
     else:
         job.enable(False)
+    # 设置环境变量
+    set_crontab_env(cron)
     # 保存定时任务
     cron.write()
 
+
+def set_crontab_env(cron):
+    """
+    设置定时任务的环境变量
+    :param cron
+    :return:
+    """
+    for key in os.environ:
+        cron.env[key] = os.environ[key]
