@@ -24,6 +24,12 @@ RUN mkdir -p /opt/ctfr
 RUN git clone https://github.com/UnaPibaGeek/ctfr.git /opt/ctfr
 RUN pip install -r /opt/ctfr/requirements.txt
 
+# Install OneForAll
+RUN mkdir -p /opt/oneforall
+RUN git clone https://gitee.com/shmilylty/OneForAll.git /opt/oneforall
+RUN apt install -y python3-testresources
+RUN pip install -r /opt/oneforall/requirements.txt
+
 # Install pekja
 RUN mkdir -p /opt/pekja
 COPY requirements.txt /opt/pekja/requirements.txt
