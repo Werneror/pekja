@@ -96,7 +96,7 @@ vim env
 运行容器：
 
 ```bash
-docker run -d -p 8000:8000 --env-file env -v /opt/pekja:/opt/pekja/database --name pekja pekja:latest
+docker run -d -p 8000:8000 --env-file env -v /opt/pekja:/opt/pekja/data --name pekja pekja:latest
 ```
 
 ### 方法二：手动安装
