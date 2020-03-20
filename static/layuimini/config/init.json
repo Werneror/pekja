@@ -78,6 +78,12 @@
           "icon": "fa fa-list",
           "href": "page/process/",
           "target": "_self"
+        },
+        {
+          "title": "Killer",
+          "icon": "fa fa-cutlery",
+          "href": "page/killer/",
+          "target": "_self"
         }
       ]
     }

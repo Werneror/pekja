@@ -107,6 +107,7 @@ def api_output_file(request):
         return api_data_file(request, 'output-')
 
 
+@login_required(login_url='/login/')
 def api_data_file(request, prefix):
     try:
         page = int(request.GET.get('page', 1))
@@ -259,3 +260,28 @@ def process(request):
         processes.append('{:<10d} {:<10d} {:<15} {:<28} {:<20} {}'.format(p.pid, p.ppid(), p.status(), create_time, p.name(), cmd))
     return render(request, 'page/show_code.html', {'code': '\n'.join(processes), 'title': '进程信息',
                                                    'time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')})
+
+
+@login_required(login_url='/login/')
+@xframe_options_sameorigin
+def killer(request):
+    error_msg = str()
+    if request.POST.get('pid'):
+        try:
+            pid = int(request.POST.get('pid'))
+        except ValueError:
+            error_msg = '进程号必须是数字'
+        else:
+            if pid <= 0:
+                error_msg = '进程号必须是正整数'
+            elif pid == 1:
+                error_msg = '不能尝试结束进程号为1的进程'
+            else:
+                try:
+                    p = psutil.Process(pid)
+                except psutil.NoSuchProcess:
+                    error_msg = '进程不存在'
+                else:
+                    p.terminate()
+                    p.wait(timeout=3)
+    return render(request, 'page/killer.html', {'error_msg': error_msg})

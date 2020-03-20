@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Show Code</title>
+    <title>结束进程</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">{% load static %}
@@ -27,23 +27,37 @@
 <div class="layuimini-container layuimini-page-anim">
     <div class="layuimini-main layui-top-box">
         <div class="layui-row layui-col-space10">
-            <div class="layui-col-md12">
-                <pre class="layui-code">{{ code }}</pre>
+
+            <div class="layui-col-md3">
+                <form class="layui-form" method="post" action="">
+                  {% csrf_token %}
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">进程ID</label>
+                    <div class="layui-input-block">
+                      <input type="number" name="pid" placeholder="请输入进程ID" autocomplete="off" class="layui-input" min="2">
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <div class="layui-input-block">
+                      <button class="layui-btn" lay-submit>结束</button>
+                    </div>
+                  </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
 </div>
 </div>
+{% if error_msg %}
 <script src="{% static 'layuimini/lib/layui-v2.5.5/layui.js' %}" charset="utf-8"></script>
 <script src="{% static 'layuimini/js/lay-config.js' %}" charset="utf-8"></script>
 <script>
-    layui.use('code', function(){ //加载code模块
-        layui.code({
-          title: '{{ title }}, 读取于{{ time }}',
-          about: false
-        });
+    layui.use('layer', function(){
+        var layer = layui.layer;
+        layer.msg("{{ error_msg }}");
     });
 </script>
+{% endif %}
 </body>
 </html>
