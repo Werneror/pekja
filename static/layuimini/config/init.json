@@ -72,6 +72,12 @@
           "icon": "fa fa-envelope-o",
           "href": "page/mail/",
           "target": "_self"
+        },
+        {
+          "title": "Process",
+          "icon": "fa fa-list",
+          "href": "page/process/",
+          "target": "_self"
         }
       ]
     }

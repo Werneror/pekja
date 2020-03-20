@@ -4,6 +4,7 @@ import time
 import datetime
 from sys import executable
 
+import psutil
 from crontab import CronSlices
 
 from django.shortcuts import render
@@ -191,8 +192,8 @@ def crontab(request):
     jobs = list()
     for job in open_crontab():
         jobs.append(job.__str__())
-    return render(request, 'page/crontab.html', {'crontab': '\n'.join(jobs),
-                                                 'time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')})
+    return render(request, 'page/show_code.html', {'code': '\n'.join(jobs), 'title': 'Crontab',
+                                                   'time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')})
 
 
 @login_required(login_url='/login/')
@@ -239,5 +240,21 @@ def var_mail(request):
             mail = f.read()
     else:
         mail = '/var/mail/mail不存在'
-    return render(request, 'page/var_mail.html', {'mail': mail,
-                                                  'time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')})
+    return render(request, 'page/show_code.html', {'code': mail, 'title': '/var/mail/mail',
+                                                   'time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')})
+
+
+@login_required(login_url='/login/')
+@xframe_options_sameorigin
+def process(request):
+    processes = list()
+    processes.append('{:<10} {:<10} {:<15} {:<20} {}'.format('pid', 'ppid', 'status', 'name', 'cmd'))
+    for pid in psutil.pids():
+        p = psutil.Process(pid)
+        try:
+            cmd = ' '.join(p.cmdline())
+        except psutil.AccessDenied:
+            cmd = 'No permission to get CMD commands'
+        processes.append('{:<10d} {:<10d} {:<15} {:<20} {}'.format(p.pid, p.ppid(), p.status(), p.name(), cmd))
+    return render(request, 'page/show_code.html', {'code': '\n'.join(processes), 'title': '进程信息',
+                                                   'time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')})

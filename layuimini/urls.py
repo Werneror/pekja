@@ -18,4 +18,5 @@ urlpatterns = [
     path('page/input/', views.input_file, name='input_file'),
     path('page/output/', views.output_file, name='output_file'),
     path('page/mail/', views.var_mail, name='var_mail'),
+    path('page/process/', views.process, name='process'),
 ]

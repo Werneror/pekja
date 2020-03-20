@@ -28,7 +28,7 @@
     <div class="layuimini-main layui-top-box">
         <div class="layui-row layui-col-space10">
             <div class="layui-col-md12">
-                <pre class="layui-code">{{ mail }}</pre>
+                <pre class="layui-code">{{ code }}</pre>
             </div>
         </div>
     </div>
@@ -40,7 +40,7 @@
 <script>
     layui.use('code', function(){ //加载code模块
         layui.code({
-          title: '/var/mail/mail, 读取于{{ time }}',
+          title: '{{ title }}, 读取于{{ time }}',
           about: false
         });
     });
