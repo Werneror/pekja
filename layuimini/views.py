@@ -248,13 +248,14 @@ def var_mail(request):
 @xframe_options_sameorigin
 def process(request):
     processes = list()
-    processes.append('{:<10} {:<10} {:<15} {:<20} {}'.format('pid', 'ppid', 'status', 'name', 'cmd'))
+    processes.append('{:<10} {:<10} {:<15} {:<28} {:<20} {}'.format('pid', 'ppid', 'status', 'create time', 'name', 'cmd'))
     for pid in psutil.pids():
         p = psutil.Process(pid)
         try:
             cmd = ' '.join(p.cmdline())
         except psutil.AccessDenied:
             cmd = 'No permission to get CMD commands'
-        processes.append('{:<10d} {:<10d} {:<15} {:<20} {}'.format(p.pid, p.ppid(), p.status(), p.name(), cmd))
+        create_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(p.create_time()))
+        processes.append('{:<10d} {:<10d} {:<15} {:<28} {:<20} {}'.format(p.pid, p.ppid(), p.status(), create_time, p.name(), cmd))
     return render(request, 'page/show_code.html', {'code': '\n'.join(processes), 'title': '进程信息',
                                                    'time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')})
