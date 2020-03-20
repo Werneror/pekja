@@ -1,10 +1,14 @@
 FROM python:3.8
 
-# Update
+# Set up for localization in China. If you are not in China, please delete this part
 COPY sources.list /etc/apt/sources.list
-RUN apt-get update && apt-get upgrade -y
 RUN pip install -U pip setuptools -i https://pypi.tuna.tsinghua.edu.cn/simple
 RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+RUN ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+RUN dpkg-reconfigure -f noninteractive tzdata
+
+# Update
+RUN apt-get update && apt-get upgrade -y
 
 # Install crontab
 RUN apt-get install -y cron

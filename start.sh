@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# Start crontab
-service cron start
+# Set timezone and restart crontab
+echo TZ=$(cat /etc/timezone) >> /etc/crontab
+echo CRON_TZ=$(cat /etc/timezone) >> /etc/crontab
+service cron restart
 
 # Set OneForAll's API
 echo "censys_api_id = '$CENSYS_API_ID'" >> /opt/oneforall/oneforall/api.py
