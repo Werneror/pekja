@@ -41,4 +41,5 @@ python manage.py migrate --noinput
 python manage.py init_admin
 python manage.py loaddata tool.json
 python manage.py cron_all_task
+python manage.py set_record_report_cron data/mail_report_dispatch.txt
 python manage.py runserver 0.0.0.0:8000 --noreload

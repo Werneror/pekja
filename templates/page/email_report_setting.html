@@ -59,7 +59,7 @@
                           <div class="layui-form-item">
                               <label class="layui-form-label">发送时间</label>
                               <div class="layui-input-inline">
-                                  <input type="text" name="dispatch" lay-verify="required" required placeholder="请输入发送时间" autocomplete="off" class="layui-input">
+                                  <input type="text" name="dispatch" {% if dispatch %}value="{{ dispatch }}"{% endif %} lay-verify="required" required placeholder="请输入发送时间" autocomplete="off" class="layui-input">
                               </div>
                               <div class="layui-form-mid layui-word-aux">Crontab表达式</div>
                           </div>

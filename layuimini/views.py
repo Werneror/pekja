@@ -2,7 +2,6 @@
 import os
 import time
 import datetime
-from sys import executable
 
 import psutil
 from crontab import CronSlices
@@ -19,17 +18,17 @@ from django.http import FileResponse
 from django.http import HttpResponseNotFound
 from django.views.decorators.clickjacking import xframe_options_sameorigin
 
-from pekja.settings import BASE_DIR
 from pekja.settings import DATA_DIRS
 from pekja.utils import open_crontab
 from pekja.utils import get_user_emails
 from pekja.utils import human_size
+from pekja.utils import get_mail_report_cron_comment
 from asset.models import Record
 from asset.models import Project
 from task.models import Tool
 from task.models import Task
 from task.models import BatchTask
-from task.cron_task import set_crontab
+from task.cron_task import set_cron_mail_report
 
 
 @login_required(login_url='/login/')
@@ -201,21 +200,22 @@ def crontab(request):
 @xframe_options_sameorigin
 def email_report(request):
     error_msg = str()
-    comment = '#send-mail-report-pekja'
-    command = '{} {} record_report'.format(executable, os.path.join(BASE_DIR, 'manage.py'))
+    dispatch = str()
     if request.method == 'POST':
         dispatch = request.POST.get('dispatch')
         if CronSlices.is_valid(dispatch):
-            set_crontab(dispatch, command, comment, True)
+            set_cron_mail_report(dispatch)
+            dispatch = str()
+            error_msg = '设置成功'
         else:
             error_msg = '不是有效的Crontab表达式'
     emails = get_user_emails()
     cron = open_crontab()
     jobs = list()
-    for job in cron.find_comment(comment):
+    for job in cron.find_comment(get_mail_report_cron_comment()):
         jobs.append(job.__str__())
     return render(request, 'page/email_report_setting.html', {'error_msg': error_msg, 'emails': emails,
-                                                              'crontab': '\n'.join(jobs),
+                                                              'crontab': '\n'.join(jobs), 'dispatch': dispatch,
                                                               'time': datetime.datetime.now().strftime(
                                                                   '%Y-%m-%d %H:%M:%S')
                                                               })

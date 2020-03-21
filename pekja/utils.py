@@ -22,12 +22,20 @@ def get_output_file_path(obj):
     return os.path.join(DATA_DIRS, 'output-{}.txt'.format(obj.id))
 
 
+def get_mail_report_dispatch_file_path():
+    return os.path.join(DATA_DIRS, 'mail_report_dispatch.txt')
+
+
 def get_task_cron_comment(obj):
     return 'task-{}-pekja'.format(obj.id)
 
 
 def get_batch_task_cron_comment(obj):
     return 'batch-task-{}-pekja'.format(obj.id)
+
+
+def get_mail_report_cron_comment():
+    return '#send-mail-report-pekja'
 
 
 def get_windows_cron_file_path():

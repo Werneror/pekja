@@ -3,8 +3,10 @@ from sys import executable
 
 from pekja.utils import get_input_file_path
 from pekja.utils import get_output_file_path
+from pekja.utils import get_mail_report_dispatch_file_path
 from pekja.utils import get_task_cron_comment
 from pekja.utils import get_batch_task_cron_comment
+from pekja.utils import get_mail_report_cron_comment
 from pekja.utils import open_crontab
 from pekja.settings import BASE_DIR
 from task.models import Tool
@@ -145,3 +147,16 @@ def set_crontab_env(cron):
     """
     for key in os.environ:
         cron.env[key] = os.environ[key]
+
+
+def set_cron_mail_report(dispatch):
+    """
+    设置发送邮件报告的定时任务
+    :param dispatch:
+    :return:
+    """
+    comment = get_mail_report_cron_comment()
+    command = '{} {} record_report'.format(executable, os.path.join(BASE_DIR, 'manage.py'))
+    set_crontab(dispatch, command, comment, True)
+    with open(get_mail_report_dispatch_file_path(), 'w') as f:
+        f.write(dispatch)
