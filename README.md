@@ -2,8 +2,7 @@
 
 SRC情报收集管理系统。
 
-未开发完毕，敬请期待。。。
-
+测试中，Bug很多，请谨慎使用。。。
 
 ## 简介
 
@@ -11,19 +10,25 @@ SRC情报收集管理系统。
 目前已经有了各种各样的情报收集工具，有些专注于某一种情报的收集，如只进行子域名收集，有些则可以收集多种不同的情报。
 但不同工具的输出格式五花八门，缺乏一种简单的方式将不同工具的输出整理汇总，并准确找出新增资产。
 
-为了解决这些问题设计开发了pekja。pekja可以调度运行各个情报收集工具，解析各个工具的输出，将结果以统一的格式保存到数据库中；
-支持将一个工具的输出作为另一个工具的输入；提供时间线页面，显示每天新增的资产；支持通过邮件发送每天新增资产的报告。
+为了解决这些问题设计开发了pekja。pekja可以通过Web界面调度运行各个情报收集工具，解析他们的输出，将结果以统一的格式保存到数据库中；
+支持将一个工具的输出作为另一个工具的输入；支持通过邮件发送每天新增资产的报告，并提供一些用于查看数据概况和进行调试的Web页面。
+
+### 技术栈
+
+- 编程语言：[Python3](https://www.python.org/)
+- Web框架：[Django](https://www.djangoproject.com/)
+- 前端框架：[LayuiMini](http://layuimini.99php.cn/)
 
 
 ## 截图
 
-### 时间线页面截图
+### Web界面截图
 
-待补充。
+![Web界面截图](screenshot/pekja-web.png)
 
 ### 邮件报告截图
 
-待补充。
+![邮件报告截图](screenshot/pekja-report.jpg)
 
 
 ## 支持的工具
@@ -53,10 +58,10 @@ SRC情报收集管理系统。
 
 ## 安装
 
-pekja在Python 3.6.0下进行开发和测试。
+pekja在Python 3.8.0下进行开发和测试。
 
 在调度工具时使用了crontab，故不支持Windows操作系统。
-在Windows操作系统中可以成功运行Web服务，也可以添加任务。
+在Windows操作系统中可以正常运行Web服务，也可以添加任务。
 但只是将需要按时执行的命令写入到`data/windows_crontab.txt`文件中，并不会真正执行。
 
 有两种安装方法，使用Docker安装或手工安装。手工安装时除了安装pekja外还需要逐个安装支持的工具，
@@ -91,13 +96,29 @@ cp docker/env.example docker/env
 编辑配置文件`env`，按实际情况修改其中的配置：
 
 ```bash
-vim env
+vim docker/env
 ```
+
+建议至少修改初始化用户的密码。
+若想要使用邮件报告功能，还需修改初始化用户的邮箱地址为真实有效的邮箱地址。
+因为邮件报告会发到每个用户的邮箱中。当然也需要修改用于发送邮件报告的邮箱的相关配置。
 
 运行容器：
 
 ```bash
 docker run -d -p 8000:8000 --env-file docker/env -v /opt/pekja:/opt/pekja/data --restart=always --name pekja pekja:latest
+```
+
+如果需要更新，可运行自动更新脚本：
+
+```bash
+./docker/update.sh
+```
+
+第一次运行该脚本前可能需要赋予该脚本可执行权限：
+
+```bash
+chmod +x docker/update.sh
 ```
 
 ### 方法二：手动安装
@@ -249,9 +270,21 @@ python manage.py runserver 127.0.0.1:8000
 
 ### Web界面
 
-在登录状态下访问[http://127.0.0.1:8000/]()可打开Web界面，查看现有数据情况。
+在登录状态下访问[http://127.0.0.1:8000/]()可打开Web界面。
+Web界面分为前端页面和管理后台两部分。前面介绍了管理后台相关操作，这里介绍各个前端页面。
 
-时间线页面可以按项目名或记录类型过滤资产，需注意此处的过滤是全匹配。
+- 数据展示
+    - 数据面板：显示当前数据概览和过去一周里每日各种类型的记录新增数量曲线图。
+    - 时间线：显示每日新增记录，可按项目或记录类型进行全匹配过滤。
+- 系统设置
+    - 邮件报告：显示邮件报告的收件邮箱地址和发送定时任务，并可设置发送定时任务。
+- 高级调试
+    - Crontab：显示Crontab中所有定时任务。
+    - Input：显示所有任务的输入文件，可查看内容，并可按任务ID过滤。
+    - Output：显示所有任务的输出文件，可查看内容，并可按任务ID过滤。
+    - Mail：显示/var/mail/mail文件的内容。当定时任务执行出错时错误信息会写在该文件中。
+    - Process：显示系统中当前所有的进程。
+    - Killer：按进程号结束某个进程。
 
 ### 邮件报告
 
@@ -265,7 +298,7 @@ python manage.py record_report
 
 该命令支持添加`yyyy-MM-dd`格式的日期字符串以发送指定日期的新增资产报告。
 
-若想要定时收到邮件报告，请在`系统设置`-`邮件报告`中通过Web界面设置Crontab定时任务。
+若想要定时收到邮件报告，请在Web界面的`系统设置`-`邮件报告`中设置Crontab定时任务。
 
 
 ### 备份数据
@@ -273,7 +306,7 @@ python manage.py record_report
 只备份工具表数据：
 
 ```bash
-python manage.py dumpdata task.tool --format=json > tool.json
+python manage.py dumpdata task.tool --format=json > docker/tool.json
 ```
 
 备份数据库中所有数据：
@@ -285,13 +318,15 @@ python manage.py dumpdata --format=json > backup.json
 导入备份的数据：
 
 ```bash
-python manage.py loaddata tool.json
+python manage.py loaddata docker/tool.json
 ```
 
 也可以在Web界面管理后台通过批量导出备份数据。
 
 
 ## 高级
+
+这部分的操作将编写代码，需要读者掌握Python 3编程语言。
 
 ### 新增对某工具的支持
 
