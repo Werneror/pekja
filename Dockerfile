@@ -1,7 +1,7 @@
 FROM python:3.8
 
 # Set up for localization in China. If you are not in China, please delete this part
-COPY sources.list /etc/apt/sources.list
+COPY docker/sources.list /etc/apt/sources.list
 RUN pip install -U pip setuptools -i https://pypi.tuna.tsinghua.edu.cn/simple
 RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 RUN ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
@@ -39,9 +39,9 @@ RUN mkdir -p /opt/pekja
 COPY requirements.txt /opt/pekja/requirements.txt
 RUN pip install -r /opt/pekja/requirements.txt
 COPY . /opt/pekja
-RUN chmod +x /opt/pekja/start.sh
+RUN chmod +x /opt/pekja/docker/start.sh
 
 # Run pekja
 WORKDIR /opt/pekja
 EXPOSE 8000
-ENTRYPOINT ["/opt/pekja/start.sh"]
+ENTRYPOINT ["/opt/pekja/docker/start.sh"]

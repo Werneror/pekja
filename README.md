@@ -85,7 +85,7 @@ mkdir -p /opt/pekja
 复制配置文件：
 
 ```bash
-cp env.example env
+cp docker/env.example docker/env
 ```
 
 编辑配置文件`env`，按实际情况修改其中的配置：
@@ -97,7 +97,7 @@ vim env
 运行容器：
 
 ```bash
-docker run -d -p 8000:8000 --env-file env -v /opt/pekja:/opt/pekja/data --restart=always --name pekja pekja:latest
+docker run -d -p 8000:8000 --env-file docker/env -v /opt/pekja:/opt/pekja/data --restart=always --name pekja pekja:latest
 ```
 
 ### 方法二：手动安装
@@ -128,7 +128,7 @@ python manage.py migrate
 导入工具数据：
 
 ```bash
-python manage.py loaddata tool.json
+python manage.py loaddata docker/tool.json
 ```
 
 创建用户：
