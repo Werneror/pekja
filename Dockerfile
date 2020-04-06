@@ -34,11 +34,16 @@ RUN git clone https://gitee.com/shmilylty/OneForAll.git /opt/oneforall
 RUN apt install -y python3-testresources
 RUN pip install -r /opt/oneforall/requirements.txt
 
-# Intall lijiejie/subDomainsBrute
+# Install lijiejie/subDomainsBrute
 RUN mkdir -p /opt/subDomainsBrute
 RUN git clone https://github.com/lijiejie/subDomainsBrute.git /opt/subDomainsBrute
 RUN apt install -y python-pip
 RUN python2 -m pip install dnspython gevent
+
+# Install Sublist3r
+RUN mkdir -p /opt/Sublist3r
+RUN git clone https://github.com/aboul3la/Sublist3r.git /opt/Sublist3r
+RUN pip install -r /opt/Sublist3r/requirements.txt
 
 # Install pekja
 RUN mkdir -p /opt/pekja
