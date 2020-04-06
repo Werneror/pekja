@@ -282,6 +282,5 @@ def killer(request):
                 except psutil.NoSuchProcess:
                     error_msg = '进程不存在'
                 else:
-                    p.terminate()
-                    p.wait(timeout=3)
+                    p.kill()
     return render(request, 'page/killer.html', {'error_msg': error_msg})
