@@ -49,6 +49,7 @@ SRC情报收集管理系统。
 | CTFR  | 域名 | CTFRParser | [CTFRParser](https://github.com/UnaPibaGeek/ctfr) | 86a804a |
 | OneForAll子域名收集  | 域名 | OneForAllParser | [OneForAll](https://github.com/shmilylty/OneForAll) | b51236a |
 
+注：OneForAll子域名收集工具有运行完毕后无法退出[BUG](https://github.com/shmilylty/OneForAll/issues/59)，待修复。
 
 ## 名词解释
 

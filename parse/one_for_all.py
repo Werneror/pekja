@@ -19,7 +19,9 @@ class OneForAllParser(Parser):
             else:
                 self.add_record(item.get('subdomain'))
                 if item.get('port'):
-                    self.add_record('{}:{}'.format(item.get('content'), item.get('port')), 'TCP端口')
+                    ip_list = item.get('content')
+                    for ip in ip_list.split(','):
+                        self.add_record('{}:{}'.format(ip, item.get('port')), 'TCP端口')
                     if item.get('title'):
                         title = '{}:{}:{}'.format(item.get('subdomain'), item.get('port'), item.get('title'))
                         self.add_record(title, '网页标题')
