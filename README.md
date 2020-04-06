@@ -389,7 +389,7 @@ from .censys_enumeration_domain import CensysEnumerationDomain
 此处给出所有自定义Django命令及其参数和说明。
 
 | 命令 | 参数 | 说明 |
-|:----:|:----:|:----:|
+|:----:|:----:|:-----|
 | cron_all_task | 无 | 把任务表中所有任务添加到crontab中 |
 | init_admin | 用户名，邮箱，密码 | 创建初始化用户，仅在没有用户时有效 |
 | parse | 任务ID | 解析指定ID任务的输出文件，将结果保存到数据库中 |
@@ -397,6 +397,17 @@ from .censys_enumeration_domain import CensysEnumerationDomain
 | set_record_report_cron | 文件路径 | 将文件路径所指文件的内容设置为发送邮件报告的时间 |
 | update_input | 任务ID | 更新指定ID任务的输入文件，只对输入文件类型为动态的任务有效 |
 
+自定义Django命令的用法如下：
+
+```shell script
+python manage.py <命令> <参数1> <参数2> <...>
+```
+
+如：
+
+```shell script
+python manage.py init_admin admin admin@example.com 123456 
+```
 
 ## 常见问题
 
