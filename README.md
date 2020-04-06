@@ -41,13 +41,14 @@ SRC情报收集管理系统。
 
 | 工具名| 收集的情报类型 | 解析类名 | 工具项目链接 | 版本 |
 |:----:|:----:|:----:|:----:|:----:|
-| Nmap子域名爆破  | 域名 | NmapDnsBruteParser | [Nmap](https://nmap.org/) | 7.7.0 |
-| Nmap SYN扫描  | TCP端口 | NmapSynScanParser | [Nmap](https://nmap.org/) | 7.7.0 |
-| Nmap UDP端口扫描  | UDP端口 | NmapUdpScanParser | [Nmap](https://nmap.org/) | 7.7.0 |
-| Censys子域名采集  | 域名 | CensysEnumerationDomain | [censys-enumeration](https://github.com/0xbharath/censys-enumeration) | 10d42fa3 |
-| Censys邮箱采集  | 邮箱 | CensysEnumerationEmail | [censys-enumeration](https://github.com/0xbharath/censys-enumeration) | 10d42fa3 |
-| CTFR  | 域名 | CTFRParser | [CTFRParser](https://github.com/UnaPibaGeek/ctfr) | 86a804a |
-| OneForAll子域名收集  | 域名 | OneForAllParser | [OneForAll](https://github.com/shmilylty/OneForAll) | b51236a |
+| Nmap子域名爆破 | 域名 | NmapDnsBruteParser | [Nmap](https://nmap.org/) | 7.7.0 |
+| Nmap SYN扫描 | TCP端口 | NmapSynScanParser | [Nmap](https://nmap.org/) | 7.7.0 |
+| Nmap UDP端口扫描 | UDP端口 | NmapUdpScanParser | [Nmap](https://nmap.org/) | 7.7.0 |
+| Censys子域名采集 | 域名 | CensysEnumerationDomain | [censys-enumeration](https://github.com/0xbharath/censys-enumeration) | 10d42fa3 |
+| Censys邮箱采集 | 邮箱 | CensysEnumerationEmail | [censys-enumeration](https://github.com/0xbharath/censys-enumeration) | 10d42fa3 |
+| CTFR | 域名 | CTFRParser | [CTFRParser](https://github.com/UnaPibaGeek/ctfr) | 86a804a |
+| OneForAll子域名收集 | 域名 | OneForAllParser | [OneForAll](https://github.com/shmilylty/OneForAll) | b51236a |
+| lijiejie/subDomainsBrute | 域名 | LijiejieSubDomainsBrute | [subDomainsBrute](https://github.com/lijiejie/subDomainsBrute) | bac5eb3 |
 
 注：OneForAll子域名收集工具有运行完毕后无法退出[BUG](https://github.com/shmilylty/OneForAll/issues/59)，待修复。
 
