@@ -55,7 +55,7 @@ class Tool(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = '工具表'
+        verbose_name = '工具'
         verbose_name_plural = verbose_name
 
 
@@ -78,7 +78,7 @@ class Task(models.Model):
         return '{}-{}'.format(self.project.name, self.name)
 
     class Meta:
-        verbose_name = '任务表'
+        verbose_name = '任务'
         verbose_name_plural = verbose_name
 
 
@@ -111,5 +111,5 @@ class BatchTask(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = '批量任务表'
+        verbose_name = '批量任务'
         verbose_name_plural = verbose_name
