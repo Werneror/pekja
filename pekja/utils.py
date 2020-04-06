@@ -11,7 +11,7 @@ from django.contrib.auth import get_user_model
 from pekja.settings import DEFAULT_FROM_EMAIL
 from pekja.settings import DATA_DIRS
 from pekja.settings import CRON_USER
-from task.models import Task
+from entities.models import Task
 
 
 def get_input_file_path(obj):

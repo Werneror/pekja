@@ -1,9 +1,7 @@
 import os
 from crontab import CronSlices
 from django.core.management.base import BaseCommand
-from task.cron_task import set_cron_mail_report
-
-
+from command.cron_task import set_cron_mail_report
 
 
 class Command(BaseCommand):

@@ -1,9 +1,9 @@
 from django.core.management.base import BaseCommand
 
-from task.models import Task
-from task.models import BatchTask
-from task.cron_task import set_cron_task
-from task.cron_task import set_cron_batch_task
+from entities.models import Task
+from entities.models import BatchTask
+from command.cron_task import set_cron_task
+from command.cron_task import set_cron_batch_task
 
 
 class Command(BaseCommand):

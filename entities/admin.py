@@ -4,15 +4,34 @@ from django.utils.html import escape
 
 from import_export.admin import ImportExportActionModelAdmin
 
-from .models import Tool
-from .models import Task
-from .models import BatchTask
-from .resources import ToolResource
-from .resources import TaskResource
-from .resources import BatchTaskResource
+from command.cron_task import set_cron_task
+from command.cron_task import set_cron_batch_task
 from .forms import ToolForm
-from .cron_task import set_cron_task
-from .cron_task import set_cron_batch_task
+from .resources import *
+
+
+@admin.register(Project)
+class ProjectAdmin(ImportExportActionModelAdmin):
+    list_display = ['name', 'src_link_url']
+    search_fields = ['name', 'comment']
+    resource_class = ProjectResource
+
+    def src_link_url(self, obj):
+        if obj.src_link:
+            url = obj.src_link.replace('"', r'%22')
+            return format_html('<a href="{}" target="_blank">{}</a>'.format(url, escape(obj.src_link)))
+        else:
+            return obj.src_link
+
+    src_link_url.short_description = 'SRC链接'
+
+
+@admin.register(Record)
+class RecordAdmin(ImportExportActionModelAdmin):
+    list_display = ['record', 'project', 'add_time', 'last_modify_time', 'type', 'source']
+    search_fields = ['record', 'source']
+    list_filter = ('project', 'type', 'source')
+    resource_class = RecordResource
 
 
 @admin.register(Tool)

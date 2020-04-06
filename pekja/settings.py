@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'import_export',
     'layuimini',
-    'asset',
-    'task',
+    'entities',
+    'command',
 ]
 
 MIDDLEWARE = [
@@ -135,8 +135,3 @@ EMAIL_PORT = os.environ.get('EMAIL_PORT')
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = 'Pekja <{}>'.format(EMAIL_HOST_USER)
-
-# For command init_admin
-INIT_ADMIN_USER = os.environ.get('INIT_ADMIN_USER')
-INIT_ADMIN_EMAIL = os.environ.get('INIT_ADMIN_EMAIL')
-INIT_ADMIN_PASSWORD = os.environ.get('INIT_ADMIN_PASSWORD')

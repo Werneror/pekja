@@ -1,7 +1,7 @@
 import os
 import time
 from pekja.utils import get_output_file_path
-from asset.models import Record
+from entities.models import Record
 
 
 class Parser:

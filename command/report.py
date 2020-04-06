@@ -1,5 +1,5 @@
 # coding:utf-8
-from asset.models import Record
+from entities.models import Record
 from pekja.utils import send_mail_to_users
 from pekja.utils import rowspan_html_table
 

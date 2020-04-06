@@ -1,11 +1,11 @@
 from django.core.management.base import BaseCommand
 
-from task.cron_task import update_dynamic_input
+from command.cron_task import run_parse
 from pekja.utils import get_task_by_id
 
 
 class Command(BaseCommand):
-    help = 'Update task input'
+    help = 'Parse the output of a task'
 
     def add_arguments(self, parser):
         parser.add_argument('task_id', type=int)
@@ -13,4 +13,4 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         task = get_task_by_id(options['task_id'])
         if task:
-            update_dynamic_input(task)
+            run_parse(task)

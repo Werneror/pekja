@@ -9,9 +9,9 @@ from pekja.utils import get_batch_task_cron_comment
 from pekja.utils import get_mail_report_cron_comment
 from pekja.utils import open_crontab
 from pekja.settings import BASE_DIR
-from task.models import Tool
-from task.models import Task
-from asset.models import Record
+from entities.models import Tool
+from entities.models import Task
+from entities.models import Record
 import parse
 
 

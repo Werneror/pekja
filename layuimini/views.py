@@ -23,12 +23,12 @@ from pekja.utils import open_crontab
 from pekja.utils import get_user_emails
 from pekja.utils import human_size
 from pekja.utils import get_mail_report_cron_comment
-from asset.models import Record
-from asset.models import Project
-from task.models import Tool
-from task.models import Task
-from task.models import BatchTask
-from task.cron_task import set_cron_mail_report
+from entities.models import Record
+from entities.models import Project
+from entities.models import Tool
+from entities.models import Task
+from entities.models import BatchTask
+from command.cron_task import set_cron_mail_report
 
 
 @login_required(login_url='/login/')

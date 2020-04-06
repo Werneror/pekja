@@ -2,8 +2,8 @@ import datetime
 
 from django.core.management.base import BaseCommand
 
-from asset.report import generate_new_record_report
-from asset.report import send_report_by_mail
+from command.report import generate_new_record_report
+from command.report import send_report_by_mail
 
 
 class Command(BaseCommand):
