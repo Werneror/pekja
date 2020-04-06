@@ -389,7 +389,7 @@ from .censys_enumeration_domain import CensysEnumerationDomain
 此处给出所有自定义Django命令及其参数和说明。
 
 | 命令 | 参数 | 说明 |
-|:----:|:----:|:-----|
+|:----:|:----:|:-----:|
 | cron_all_task | 无 | 把任务表中所有任务添加到crontab中 |
 | init_admin | 用户名，邮箱，密码 | 创建初始化用户，仅在没有用户时有效 |
 | parse | 任务ID | 解析指定ID任务的输出文件，将结果保存到数据库中 |
@@ -415,7 +415,7 @@ python manage.py init_admin admin admin@example.com 123456
 
 没有特别含义，是用[UNIQ名生成器](https://uniq.site/zh/)随机生成的。
 
-### 有没有类似类似项目？
+### 有没有类似项目？
 
 有，后文中列出来我已知的类似项目。
 
