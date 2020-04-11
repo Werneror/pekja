@@ -1,7 +1,5 @@
 from django import forms
-import inspect
-import parse
-from parse.parser import Parser
+from parse import get_parse_class_list
 
 
 class ToolForm(forms.ModelForm):
@@ -15,6 +13,4 @@ class ToolForm(forms.ModelForm):
 
     @classmethod
     def get_parse_class_choices(cls):
-        parse_class_list = [m[0] for m in inspect.getmembers(parse, inspect.isclass)
-                            if issubclass(m[1], Parser) and m[0] != 'Parser']
-        return tuple([(class_name, class_name) for class_name in parse_class_list])
+        return tuple([(class_name, class_name) for class_name in get_parse_class_list()])

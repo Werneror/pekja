@@ -12,7 +12,7 @@ from pekja.settings import BASE_DIR
 from entities.models import Tool
 from entities.models import Task
 from entities.models import Record
-import parse
+from parse import get_parse_class
 
 
 def set_cron_task(obj):
@@ -74,9 +74,8 @@ def run_parse(task):
     :param task:
     :return:
     """
-    try:
-        parse_class = getattr(parse, task.tool.parse_class_name)
-    except AttributeError:
+    parse_class = get_parse_class(task.tool.parse_class_name)
+    if parse_class is None:
         print('Parse class {} does not exist'.format(task.tool.parse_class_name))
     else:
         p = parse_class(task)
