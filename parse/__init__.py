@@ -13,13 +13,13 @@ def get_parse_class_list():
         module = importlib.import_module('parse.' + file)
         parse_class_list += [m[0] for m in inspect.getmembers(module, inspect.isclass)
                              if issubclass(m[1], Parser) and m[0] != 'Parser']
-    return parse_class_list
+    return list(set(parse_class_list))
 
 
 def get_parse_class(class_name):
     pkg_path = os.path.dirname(__file__)
     for _, file, _ in pkgutil.iter_modules([pkg_path]):
-        module = importlib.import_module('parse.src.' + file)
+        module = importlib.import_module('parse.' + file)
         for m in inspect.getmembers(module, inspect.isclass):
             if issubclass(m[1], Parser) and m[0] == class_name:
                 return m[1]
