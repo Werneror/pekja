@@ -1,0 +1,4 @@
+mail.werner.wiki              	123.58.177.51
+search.werner.wiki            	119.28.89.38
+ycj.werner.wiki               	119.28.89.38
+www.werner.wiki               	119.28.89.38

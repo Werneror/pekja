@@ -367,10 +367,24 @@ class CensysEnumerationDomain(Parser):    # 类名会出现在工具表输出解
                 self.add_record(sub_domain)    # 将解析出的记录加入到数据库中
 ```
 
-然后编辑`parse/__init__.py`，在末尾新增一行，引入刚刚编写的结果解析类：
+#### 添加测试
+
+将`Censys子域名采集`的输出示例文件保存到`parse/examples/censys_enumeration.json`，
+然后编辑`parse/tests.py`文件，在类`ParserTest`中新增方法`test_censys_enumeration_domain`，代码如下：
 
 ```python
-from .censys_enumeration_domain import CensysEnumerationDomain
+def test_censys_enumeration_domain(self):
+    tool = Tool.objects.create(name='censys_enumeration_domain_tool', type='censys_enumeration_domain_type')
+    task = Task.objects.create(name='censys_enumeration_domain_task', project=self.project, tool=tool)
+    parser = CensysEnumerationDomain(task, os.path.join('parse', 'examples', 'censys_enumeration.json'))
+    parser.parse()
+    self.assertEqual(Record.objects.filter(type='censys_enumeration_domain_type').count(), 2)
+```
+
+运行如下命令进行测试：
+
+```shell script
+python manage.py test parse
 ```
 
 #### 在工具表中添加工具

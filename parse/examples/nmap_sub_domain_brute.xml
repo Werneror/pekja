@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.70 scan initiated Sat Apr 11 20:53:22 2020 as: nmap -sn -Pn -&#45;script=dns-brute -oX /opt/pekja/data/output-10.txt iana.org -->
+<nmaprun scanner="nmap" args="nmap -sn -Pn -&#45;script=dns-brute -oX /opt/pekja/data/output-10.txt iana.org" start="1586609602" startstr="Sat Apr 11 20:53:22 2020" version="7.70" xmloutputversion="1.04">
+<verbose level="0"/>
+<debugging level="0"/>
+<host starttime="1586609603" endtime="1586609716"><status state="up" reason="user-set" reason_ttl="0"/>
+<address addr="192.0.43.8" addrtype="ipv4"/>
+<hostnames>
+<hostname name="iana.org" type="user"/>
+<hostname name="iana.org" type="PTR"/>
+</hostnames>
+<hostscript><script id="dns-brute" output="&#xa;  DNS Brute-force hostnames: &#xa;    stage.iana.org - 10.32.10.200&#xa;    git.iana.org - 2620:0:2d0:200:0:0:0:8&#xa;    whois.iana.org - 192.0.32.59&#xa;    whois.iana.org - 2620:0:2d0:200:0:0:0:59&#xa;    www.iana.org - 192.0.32.8&#xa;    www.iana.org - 2620:0:2d0:200:0:0:0:8"><table key="DNS Brute-force hostnames">
+<table>
+<elem key="hostname">stage.iana.org</elem>
+<elem key="address">10.32.10.200</elem>
+</table>
+<table>
+<elem key="hostname">git.iana.org</elem>
+<elem key="address">2620:0:2d0:200:0:0:0:8</elem>
+</table>
+<table>
+<elem key="hostname">whois.iana.org</elem>
+<elem key="address">192.0.32.59</elem>
+</table>
+<table>
+<elem key="hostname">whois.iana.org</elem>
+<elem key="address">2620:0:2d0:200:0:0:0:59</elem>
+</table>
+<table>
+<elem key="hostname">www.iana.org</elem>
+<elem key="address">192.0.32.8</elem>
+</table>
+<table>
+<elem key="hostname">www.iana.org</elem>
+<elem key="address">2620:0:2d0:200:0:0:0:8</elem>
+</table>
+</table>
+</script></hostscript></host>
+<runstats><finished time="1586609716" timestr="Sat Apr 11 20:55:16 2020" elapsed="113.96" summary="Nmap done at Sat Apr 11 20:55:16 2020; 1 IP address (1 host up) scanned in 113.96 seconds" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

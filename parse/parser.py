@@ -6,9 +6,12 @@ from entities.models import Record
 
 class Parser:
 
-    def __init__(self, task):
+    def __init__(self, task, file_path=None):
         self.task = task
-        self.file_path = get_output_file_path(task)
+        if file_path is not None:
+            self.file_path = file_path
+        else:
+            self.file_path = get_output_file_path(task)
 
     def parse(self):
         pass
