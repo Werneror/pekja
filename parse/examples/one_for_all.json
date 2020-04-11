@@ -28,7 +28,7 @@
          "port": 80,
          "status": 200,
          "reason": "OK",
-         "title": "ÈôË®Õ« | Try harder",
+         "title": "è‹¥æ°´æ–‹ | Try harder",
          "banner": "nginx"
     },
      {
@@ -44,7 +44,7 @@
          "port": 80,
          "status": 200,
          "reason": "OK",
-         "title": "ÈôË®Õ« | Try harder",
+         "title": "è‹¥æ°´æ–‹ | Try harder",
          "banner": "nginx"
     },
      {
@@ -60,7 +60,7 @@
          "port": 80,
          "status": 200,
          "reason": "OK",
-         "title": "ÂªÊÒ ¨C Ê±¹âÔÚÕâÀï³Áµí",
+         "title": "é™‹å®¤ â€“ æ—¶å…‰åœ¨è¿™é‡Œæ²‰æ·€",
          "banner": "nginx"
     },
      {
@@ -76,7 +76,7 @@
          "port": 80,
          "status": 200,
          "reason": "OK",
-         "title": "ÒÔÊ«Ö®Ãû - ËÑË÷ÄãµÄÃû×ÖÔ´ÓÚÄÄ¾ä¹ÅÊ«´Ê",
+         "title": "ä»¥è¯—ä¹‹å - æœç´¢ä½ çš„åå­—æºäºå“ªå¥å¤è¯—è¯",
          "banner": "nginx"
     },
      {
@@ -92,7 +92,7 @@
          "port": 80,
          "status": 200,
          "reason": "OK",
-         "title": "ÈôË®Õ« | Try harder",
+         "title": "è‹¥æ°´æ–‹ | Try harder",
          "banner": "nginx"
     },
      {
