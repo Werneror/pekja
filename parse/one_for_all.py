@@ -10,8 +10,8 @@ class OneForAllParser(Parser):
        for OneForAll.py b51236a"""
 
     def parse(self):
-        with open(self.file_path) as f:
-            output = json.loads(f.read())
+        with open(self.file_path, encoding='utf-8') as f:
+            output = json.loads(f.read(), encoding='utf-8')
         for item in output:
             reason = item.get('reason', '')
             if reason.startswith('(') and reason.endswith(')'):
