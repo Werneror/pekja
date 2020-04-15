@@ -84,3 +84,10 @@ class ParserTest(TestCase):
         parser = NmapUdpScanParser(task, os.path.join('parse', 'examples', 'nmap_udp_scan.xml'))
         parser.parse()
         self.assertEqual(Record.objects.filter(type='nmap_udp_scan_type').count(), 2)
+
+    def test_nmap_http_scan(self):
+        tool = Tool.objects.create(name='nmap_http_scan_tool', type='nmap_http_scan_type')
+        task = Task.objects.create(name='nmap_http_scan_task', project=self.project, tool=tool)
+        parser = NmapUdpScanParser(task, os.path.join('parse', 'examples', 'nmap_http_scan.xml'))
+        parser.parse()
+        self.assertEqual(Record.objects.filter(type='nmap_http_scan_type').count(), 5)

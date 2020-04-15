@@ -50,6 +50,7 @@ SRC情报收集管理系统。
 | lijiejie/subDomainsBrute | 域名 | LijiejieSubDomainsBrute | [subDomainsBrute](https://github.com/lijiejie/subDomainsBrute) | bac5eb3 |
 | Censys子域名采集 | 域名 | CensysEnumerationDomain | [censys-enumeration](https://github.com/0xbharath/censys-enumeration) | 10d42fa3 |
 | Nmap子域名爆破 | 域名 | NmapDnsBruteParser | [Nmap](https://nmap.org/) | 7.7.0 |
+| Nmap HTTP扫描 | 网站 | NmapHTTPScanParser | [Nmap](https://nmap.org/) | 7.7.0 |
 
 注：OneForAll子域名收集工具有运行完毕后无法退出[BUG](https://github.com/shmilylty/OneForAll/issues/59)，待修复。
 

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///C:/Program Files (x86)/Nmap/nmap.xsl" type="text/xsl"?>
+
+<!-- Nmap 7.70 scan initiated Wed Apr 15 20:22:58 2020 as: nmap -sV -sC -p 80,443,7000,8080 -iL input.txt -&#45;open -oX out.xml -->
+<nmaprun scanner="nmap" args="nmap -sV -sC -p 80,443,7000,8080 -iL input.txt --open -oX out.xml" start="1586953378" startstr="Wed Apr 15 20:22:58 2020" version="7.70" xmloutputversion="1.04"> 
+  <scaninfo type="syn" protocol="tcp" numservices="4" services="80,443,7000,8080"/>  
+  <verbose level="0"/>  
+  <debugging level="0"/>  
+  <host starttime="1586953379" endtime="1586953415">
+    <status state="up" reason="echo-reply" reason_ttl="56"/>  
+    <address addr="14.215.177.39" addrtype="ipv4"/>  
+    <hostnames> 
+      <hostname name="www.baidu.com" type="user"/>  
+      <hostname name="www.baidu.com" type="PTR"/> 
+    </hostnames>  
+    <ports>
+      <extraports state="filtered" count="2"> 
+        <extrareasons reason="no-responses" count="2"/> 
+      </extraports>  
+      <port protocol="tcp" portid="80">
+        <state state="open" reason="syn-ack" reason_ttl="56"/>
+        <service name="http" product="Apache httpd" method="probed" conf="10">
+          <cpe>cpe:/a:apache:http_server</cpe>
+        </service>
+        <script id="http-robots.txt" output="10 disallowed entries 
+/baidu /s? /ulink? /link? /home/news/data/ /bh /shifen/ 
+/homepage/ /cpro /"/>
+        <script id="http-server-header" output="BWS/1.1">
+          <elem>BWS/1.1</elem> 
+        </script>
+        <script id="http-title" output="\xE7\x99\xBE\xE5\xBA\xA6\xE4\xB8\x80\xE4\xB8\x8B\xEF\xBC\x8C\xE4\xBD\xA0\xE5\xB0\xB1\xE7\x9F\xA5\xE9\x81\x93">
+          <elem key="title">\xE7\x99\xBE\xE5\xBA\xA6\xE4\xB8\x80\xE4\xB8\x8B\xEF\xBC\x8C\xE4\xBD\xA0\xE5\xB0\xB1\xE7\x9F\xA5\xE9\x81\x93</elem> 
+        </script>
+      </port>  
+      <port protocol="tcp" portid="443">
+        <state state="open" reason="syn-ack" reason_ttl="56"/>
+        <service name="http" product="Apache httpd" tunnel="ssl" method="probed" conf="10">
+          <cpe>cpe:/a:apache:http_server</cpe>
+        </service>
+        <script id="http-robots.txt" output="10 disallowed entries 
+/baidu /s? /ulink? /link? /home/news/data/ /bh /shifen/ 
+/homepage/ /cpro /"/>
+        <script id="http-server-header" output="BWS/1.1">
+          <elem>BWS/1.1</elem> 
+        </script>
+        <script id="http-title" output="Site doesn't have a title (text/html)."/>
+        <script id="http-trane-info" output="Problem with XML parsing of /evox/about"/>
+        <script id="ssl-cert" output="Subject: commonName=baidu.com/organizationName=Beijing Baidu Netcom Science Technology Co., Ltd/stateOrProvinceName=beijing/countryName=CN
+Subject Alternative Name: DNS:baidu.com, DNS:click.hm.baidu.com, DNS:cm.pos.baidu.com, DNS:log.hm.baidu.com, DNS:update.pan.baidu.com, DNS:wn.pos.baidu.com, DNS:*.91.com, DNS:*.aipage.cn, DNS:*.aipage.com, DNS:*.apollo.auto, DNS:*.baidu.com, DNS:*.baidubce.com, DNS:*.baiducontent.com, DNS:*.baidupcs.com, DNS:*.baidustatic.com, DNS:*.baifae.com, DNS:*.baifubao.com, DNS:*.bce.baidu.com, DNS:*.bcehost.com, DNS:*.bdimg.com, DNS:*.bdstatic.com, DNS:*.bdtjrcv.com, DNS:*.bj.baidubce.com, DNS:*.chuanke.com, DNS:*.dlnel.com, DNS:*.dlnel.org, DNS:*.dueros.baidu.com, DNS:*.eyun.baidu.com, DNS:*.fanyi.baidu.com, DNS:*.gz.baidubce.com, DNS:*.hao123.baidu.com, DNS:*.hao123.com, DNS:*.hao222.com, DNS:*.im.baidu.com, DNS:*.map.baidu.com, DNS:*.mbd.baidu.com, DNS:*.mipcdn.com, DNS:*.news.baidu.com, DNS:*.nuomi.com, DNS:*.safe.baidu.com, DNS:*.smartapps.cn, DNS:*.ssl2.duapps.com, DNS:*.su.baidu.com, DNS:*.trustgo.com, DNS:*.xueshu.baidu.com, DNS:apollo.auto, DNS:baifae.com, DNS:baifubao.com, DNS:dwz.cn, DNS:mct.y.nuomi.com, DNS:www.baidu.cn, DNS:www.baidu.com.cn
+Not valid before: 2019-05-09T01:22:02
+Not valid after:  2020-06-25T05:31:02">
+          <table key="subject"> 
+            <elem key="stateOrProvinceName">beijing</elem>  
+            <elem key="countryName">CN</elem>  
+            <elem key="localityName">beijing</elem>  
+            <elem key="organizationName">Beijing Baidu Netcom Science Technology Co., Ltd</elem>  
+            <elem key="commonName">baidu.com</elem>  
+            <elem key="organizationalUnitName">service operation department</elem> 
+          </table>  
+          <table key="issuer"> 
+            <elem key="organizationName">GlobalSign nv-sa</elem>  
+            <elem key="countryName">BE</elem>  
+            <elem key="commonName">GlobalSign Organization Validation CA - SHA256 - G2</elem> 
+          </table>  
+          <table key="pubkey"> 
+            <elem key="bits">2048</elem>  
+            <elem key="exponent">userdata: 03E299B8</elem>  
+            <elem key="type">rsa</elem>  
+            <elem key="modulus">userdata: 03E296E8</elem> 
+          </table>  
+          <table key="extensions"> 
+            <table> 
+              <elem key="value">Digital Signature, Key Encipherment</elem>  
+              <elem key="critical">true</elem>  
+              <elem key="name">X509v3 Key Usage</elem> 
+            </table>  
+            <table> 
+              <elem key="value">CA Issuers - URI:http://secure.globalsign.com/cacert/gsorganizationvalsha2g2r1.crt OCSP - URI:http://ocsp2.globalsign.com/gsorganizationvalsha2g2</elem>  
+              <elem key="name">Authority Information Access</elem> 
+            </table>  
+            <table> 
+              <elem key="value">Policy: 1.3.6.1.4.1.4146.1.20 CPS: https://www.globalsign.com/repository/ Policy: 2.23.140.1.2.2</elem>  
+              <elem key="name">X509v3 Certificate Policies</elem> 
+            </table>  
+            <table> 
+              <elem key="value">CA:FALSE</elem>  
+              <elem key="name">X509v3 Basic Constraints</elem> 
+            </table>  
+            <table> 
+              <elem key="value">Full Name: URI:http://crl.globalsign.com/gs/gsorganizationvalsha2g2.crl</elem>  
+              <elem key="name">X509v3 CRL Distribution Points</elem> 
+            </table>  
+            <table> 
+              <elem key="value">DNS:baidu.com, DNS:click.hm.baidu.com, DNS:cm.pos.baidu.com, DNS:log.hm.baidu.com, DNS:update.pan.baidu.com, DNS:wn.pos.baidu.com, DNS:*.91.com, DNS:*.aipage.cn, DNS:*.aipage.com, DNS:*.apollo.auto, DNS:*.baidu.com, DNS:*.baidubce.com, DNS:*.baiducontent.com, DNS:*.baidupcs.com, DNS:*.baidustatic.com, DNS:*.baifae.com, DNS:*.baifubao.com, DNS:*.bce.baidu.com, DNS:*.bcehost.com, DNS:*.bdimg.com, DNS:*.bdstatic.com, DNS:*.bdtjrcv.com, DNS:*.bj.baidubce.com, DNS:*.chuanke.com, DNS:*.dlnel.com, DNS:*.dlnel.org, DNS:*.dueros.baidu.com, DNS:*.eyun.baidu.com, DNS:*.fanyi.baidu.com, DNS:*.gz.baidubce.com, DNS:*.hao123.baidu.com, DNS:*.hao123.com, DNS:*.hao222.com, DNS:*.im.baidu.com, DNS:*.map.baidu.com, DNS:*.mbd.baidu.com, DNS:*.mipcdn.com, DNS:*.news.baidu.com, DNS:*.nuomi.com, DNS:*.safe.baidu.com, DNS:*.smartapps.cn, DNS:*.ssl2.duapps.com, DNS:*.su.baidu.com, DNS:*.trustgo.com, DNS:*.xueshu.baidu.com, DNS:apollo.auto, DNS:baifae.com, DNS:baifubao.com, DNS:dwz.cn, DNS:mct.y.nuomi.com, DNS:www.baidu.cn, DNS:www.baidu.com.cn</elem>  
+              <elem key="name">X509v3 Subject Alternative Name</elem> 
+            </table>  
+            <table> 
+              <elem key="value">TLS Web Server Authentication, TLS Web Client Authentication</elem>  
+              <elem key="name">X509v3 Extended Key Usage</elem> 
+            </table>  
+            <table> 
+              <elem key="value">76:B5:E6:D6:49:F8:F8:36:EA:75:A9:6D:5E:4D:55:5B:37:5C:FD:C7</elem>  
+              <elem key="name">X509v3 Subject Key Identifier</elem> 
+            </table>  
+            <table> 
+              <elem key="value">keyid:96:DE:61:F1:BD:1C:16:29:53:1C:C0:CC:7D:3B:83:00:40:E6:1A:7C</elem>  
+              <elem key="name">X509v3 Authority Key Identifier</elem> 
+            </table>  
+            <table> 
+              <elem key="value">Signed Certificate Timestamp: Version : v1(0) Log ID : BB:D9:DF:BC:1F:8A:71:B5:93:94:23:97:AA:92:7B:47: 38:57:95:0A:AB:52:E8:1A:90:96:64:36:8E:1E:D1:85 Timestamp : May 9 01:22:04.826 2019 GMT Extensions: none Signature : ecdsa-with-SHA256 30:45:02:20:2C:7B:4D:C0:F9:85:47:8A:2D:0A:C0:79: 3B:D6:B4:B5:66:F8:AA:FB:82:58:AD:23:36:FE:16:BC: A6:83:99:21:02:21:00:C0:2F:CD:9C:99:20:CB:7D:91: 5F:D2:8B:C6:13:10:73:B5:C1:54:03:33:41:9F:A6:6A: C5:14:93:CF:69:2B:6B Signed Certificate Timestamp: Version : v1(0) Log ID : 6F:53:76:AC:31:F0:31:19:D8:99:00:A4:51:15:FF:77: 15:1C:11:D9:02:C1:00:29:06:8D:B2:08:9A:37:D9:13 Timestamp : May 9 01:22:03.983 2019 GMT Extensions: none Signature : ecdsa-with-SHA256 30:45:02:20:03:32:68:9E:39:D0:EB:5F:19:61:DB:A7: 12:69:6F:28:44:81:02:A5:3C:C2:A3:13:D5:7E:98:26: 5F:20:1A:A0:02:21:00:A7:8B:62:B3:B0:B4:44:32:E2: 11:FF:45:8D:55:11:2C:36:AB:29:93:44:C8:34:5C:CE: 7C:35:57:31:AE:AB:12</elem>  
+              <elem key="name">CT Precertificate SCTs</elem> 
+            </table> 
+          </table>  
+          <elem key="sig_algo">sha256WithRSAEncryption</elem>  
+          <table key="validity"> 
+            <elem key="notBefore">2019-05-09T01:22:02</elem>  
+            <elem key="notAfter">2020-06-25T05:31:02</elem> 
+          </table>  
+          <elem key="md5">36b7f3392234ddc6e0ad9826b7fcce57</elem>  
+          <elem key="sha1">d1f6323db6f2ec81e7023690f49b2d91e0c3993a</elem>  
+          <elem key="pem">-----BEGIN CERTIFICATE----- MIIJrzCCCJegAwIBAgIMLO4ZPBiCeOo+Q3VzMA0GCSqGSIb3DQEBCwUAMGYxCzAJ BgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMTwwOgYDVQQDEzNH bG9iYWxTaWduIE9yZ2FuaXphdGlvbiBWYWxpZGF0aW9uIENBIC0gU0hBMjU2IC0g RzIwHhcNMTkwNTA5MDEyMjAyWhcNMjAwNjI1MDUzMTAyWjCBpzELMAkGA1UEBhMC Q04xEDAOBgNVBAgTB2JlaWppbmcxEDAOBgNVBAcTB2JlaWppbmcxJTAjBgNVBAsT HHNlcnZpY2Ugb3BlcmF0aW9uIGRlcGFydG1lbnQxOTA3BgNVBAoTMEJlaWppbmcg QmFpZHUgTmV0Y29tIFNjaWVuY2UgVGVjaG5vbG9neSBDby4sIEx0ZDESMBAGA1UE AxMJYmFpZHUuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtMa/ 2lMgD+pA87hSF2Y7NgGNErSZDdObbBhTsRkIsPpzRz4NOnlieGEuVDxJfFbawL5h VdVCcGoQvvW9jWSWIQCTYwmHtxm6DiA+SchT7QKPRgHroQeTc7vt8bPJ4vvd8Dkq g630QZi8huq6dKim49DlxY6zC7LSrJF0Dv+AECM2YmUItIf1VwwlxwDY9ahduDNB pypf2/pwniG7rkIWZgdp/hwmKoEPq3Pj1lIgpG2obNRmSKRv8mgKxWWhTr8EekBD HNN1+3WsGdZKNQVuz9Vl0UTKawxYBMSFTx++LDLR8cYo+/kmNrVt+suWoqDQvPhR 3wdEvY9vZ8DUr9nNwwIDAQABo4IGGTCCBhUwDgYDVR0PAQH/BAQDAgWgMIGgBggr BgEFBQcBAQSBkzCBkDBNBggrBgEFBQcwAoZBaHR0cDovL3NlY3VyZS5nbG9iYWxz aWduLmNvbS9jYWNlcnQvZ3Nvcmdhbml6YXRpb252YWxzaGEyZzJyMS5jcnQwPwYI KwYBBQUHMAGGM2h0dHA6Ly9vY3NwMi5nbG9iYWxzaWduLmNvbS9nc29yZ2FuaXph dGlvbnZhbHNoYTJnMjBWBgNVHSAETzBNMEEGCSsGAQQBoDIBFDA0MDIGCCsGAQUF BwIBFiZodHRwczovL3d3dy5nbG9iYWxzaWduLmNvbS9yZXBvc2l0b3J5LzAIBgZn gQwBAgIwCQYDVR0TBAIwADBJBgNVHR8EQjBAMD6gPKA6hjhodHRwOi8vY3JsLmds b2JhbHNpZ24uY29tL2dzL2dzb3JnYW5pemF0aW9udmFsc2hhMmcyLmNybDCCA0kG A1UdEQSCA0AwggM8ggliYWlkdS5jb22CEmNsaWNrLmhtLmJhaWR1LmNvbYIQY20u cG9zLmJhaWR1LmNvbYIQbG9nLmhtLmJhaWR1LmNvbYIUdXBkYXRlLnBhbi5iYWlk dS5jb22CEHduLnBvcy5iYWlkdS5jb22CCCouOTEuY29tggsqLmFpcGFnZS5jboIM Ki5haXBhZ2UuY29tgg0qLmFwb2xsby5hdXRvggsqLmJhaWR1LmNvbYIOKi5iYWlk dWJjZS5jb22CEiouYmFpZHVjb250ZW50LmNvbYIOKi5iYWlkdXBjcy5jb22CESou YmFpZHVzdGF0aWMuY29tggwqLmJhaWZhZS5jb22CDiouYmFpZnViYW8uY29tgg8q LmJjZS5iYWlkdS5jb22CDSouYmNlaG9zdC5jb22CCyouYmRpbWcuY29tgg4qLmJk c3RhdGljLmNvbYINKi5iZHRqcmN2LmNvbYIRKi5iai5iYWlkdWJjZS5jb22CDSou Y2h1YW5rZS5jb22CCyouZGxuZWwuY29tggsqLmRsbmVsLm9yZ4ISKi5kdWVyb3Mu YmFpZHUuY29tghAqLmV5dW4uYmFpZHUuY29tghEqLmZhbnlpLmJhaWR1LmNvbYIR Ki5nei5iYWlkdWJjZS5jb22CEiouaGFvMTIzLmJhaWR1LmNvbYIMKi5oYW8xMjMu Y29tggwqLmhhbzIyMi5jb22CDiouaW0uYmFpZHUuY29tgg8qLm1hcC5iYWlkdS5j b22CDyoubWJkLmJhaWR1LmNvbYIMKi5taXBjZG4uY29tghAqLm5ld3MuYmFpZHUu Y29tggsqLm51b21pLmNvbYIQKi5zYWZlLmJhaWR1LmNvbYIOKi5zbWFydGFwcHMu Y26CESouc3NsMi5kdWFwcHMuY29tgg4qLnN1LmJhaWR1LmNvbYINKi50cnVzdGdv LmNvbYISKi54dWVzaHUuYmFpZHUuY29tggthcG9sbG8uYXV0b4IKYmFpZmFlLmNv bYIMYmFpZnViYW8uY29tggZkd3ouY26CD21jdC55Lm51b21pLmNvbYIMd3d3LmJh aWR1LmNughB3d3cuYmFpZHUuY29tLmNuMB0GA1UdJQQWMBQGCCsGAQUFBwMBBggr BgEFBQcDAjAdBgNVHQ4EFgQUdrXm1kn4+DbqdaltXk1VWzdc/ccwHwYDVR0jBBgw FoAUlt5h8b0cFilTHMDMfTuDAEDmGnwwggEEBgorBgEEAdZ5AgQCBIH1BIHyAPAA dgC72d+8H4pxtZOUI5eqkntHOFeVCqtS6BqQlmQ2jh7RhQAAAWqaLuGaAAAEAwBH MEUCICx7TcD5hUeKLQrAeTvWtLVm+Kr7glitIzb+Frymg5khAiEAwC/NnJkgy32R X9KLxhMQc7XBVAMzQZ+masUUk89pK2sAdgBvU3asMfAxGdiZAKRRFf93FRwR2QLB ACkGjbIImjfZEwAAAWqaLt5PAAAEAwBHMEUCIAMyaJ450OtfGWHbpxJpbyhEgQKl PMKjE9V+mCZfIBqgAiEAp4tis7C0RDLiEf9FjVURLDarKZNEyDRcznw1VzGuqxIw DQYJKoZIhvcNAQELBQADggEBAKq5zVKO3DZdR9SL8zIXBkaDYKMnBUkpsRtGbjj+ k/4JQ2zSoVgkEkK3q0H4Rwp9ZLV13FpFFLKkGGuctzuPs37SvcBySzUFrg0tGR9Q c3Ja35cYO9sq895EzmQtwR6EzHYkPjBnIyboT/cL9uxp139RqaBvuMQU4sBKSsQA XVdqyUHEJSsyGKpiqB5JgXMcgV9e+uSUMsNQbY6qzGxMUwz6j040eZ+lYMD4UHW4 oZ0B5qslIww7JAJAWCT/NAKLlGEQaC+2gOPQX0oKpwLSwJg+HegCyCdxJrKoh7bb nRBHS8ITYjTG0Dw5CTklj/6i9PP735snPfzQKOht3N0X0x8= -----END CERTIFICATE-----</elem> 
+        </script>
+        <script id="ssl-date" output="2020-04-15T12:23:23+00:00; 0s from scanner time.">
+          <elem key="delta">0.0</elem>  
+          <elem key="date">2020-04-15T12:23:23+00:00</elem> 
+        </script>
+        <script id="tls-alpn" output="
+  http/1.1">
+          <elem>http/1.1</elem> 
+        </script>
+        <script id="tls-nextprotoneg" output="
+  http/1.1">
+          <elem>http/1.1</elem> 
+        </script>
+      </port> 
+    </ports>  
+    <times srtt="8000" rttvar="4500" to="100000"/> 
+  </host>  
+  <host starttime="1586953379" endtime="1586953415">
+    <status state="up" reason="echo-reply" reason_ttl="56"/>  
+    <address addr="14.18.175.154" addrtype="ipv4"/>  
+    <hostnames> 
+      <hostname name="www.qq.com" type="user"/>  
+      <hostname name="www.qq.com" type="PTR"/> 
+    </hostnames>  
+    <ports>
+      <extraports state="filtered" count="1"> 
+        <extrareasons reason="no-response" count="1"/> 
+      </extraports>  
+      <port protocol="tcp" portid="80">
+        <state state="open" reason="syn-ack" reason_ttl="56"/>
+        <service name="http" product="nginx" method="probed" conf="10">
+          <cpe>cpe:/a:igor_sysoev:nginx</cpe>
+        </service>
+        <script id="http-server-header" output="nginx">
+          <elem>nginx</elem> 
+        </script>
+        <script id="http-title" output="Did not follow redirect to https://www.qq.com/">
+          <elem key="redirect_url">https://www.qq.com/</elem> 
+        </script>
+      </port>  
+      <port protocol="tcp" portid="443">
+        <state state="open" reason="syn-ack" reason_ttl="56"/>
+        <service name="http" product="nginx" tunnel="ssl" method="probed" conf="10">
+          <cpe>cpe:/a:igor_sysoev:nginx</cpe>
+        </service>
+        <script id="http-server-header" output="nginx">
+          <elem>nginx</elem> 
+        </script>
+        <script id="http-title" output="\xCC\xDA\xD1\xB6\xCA\xD7\xD2\xB3">
+          <elem key="title">\xCC\xDA\xD1\xB6\xCA\xD7\xD2\xB3</elem> 
+        </script>
+        <script id="ssl-cert" output="Subject: commonName=www.qq.com/organizationName=Shenzhen Tencent Computer Systems Company Limited/stateOrProvinceName=Guangdong Sheng/countryName=CN
+Subject Alternative Name: DNS:www.qq.com, DNS:10years.qq.com, DNS:2010.qq.com, DNS:2011.qq.com, DNS:2012.qq.com, DNS:2014.qq.com, DNS:2016.qq.com, DNS:2018.qq.com, DNS:3g.tech.qq.com, DNS:61.qq.com, DNS:arsenal.qq.com, DNS:astro.fashion.qq.com, DNS:astro.lady.qq.com, DNS:astro.qq.com, DNS:australianopen.qq.com, DNS:auto.qq.com, DNS:baby.qq.com, DNS:bar.tech.qq.com, DNS:bbs.list.qq.com, DNS:bella.qq.com, DNS:bi.qq.com, DNS:biznext.qq.com, DNS:bj.jjj.qq.com, DNS:bj.qq.com, DNS:bj2022.qq.com, DNS:boao.qq.com, DNS:business.qq.com, DNS:bwf.sports.qq.com, DNS:campus.qq.com, DNS:cd.qq.com, DNS:cdpanda.qq.com, DNS:china.qq.com, DNS:city.qq.com, DNS:cost.qq.com, DNS:cp.qq.com, DNS:cq.qq.com, DNS:cul.qq.com, DNS:cy.qq.com, DNS:dajia.qq.com, DNS:dalian.qq.com, DNS:dao.qq.com, DNS:dao.rushidao.qq.com, DNS:data.auto.qq.com, DNS:data.re.qq.com, DNS:digi.qq.com, DNS:digi.tech.qq.com, DNS:economy.qq.com, DNS:edu.qq.com, DNS:en.2012.qq.com, DNS:ent.qq.com, DNS:euro2012.qq.com, DNS:fact.qq.com, DNS:fans.sports.qq.com, DNS:fashion.qq.com, DNS:fcbarcelona.qq.com, DNS:finance.qq.com, DNS:fj.qq.com, DNS:fo.rushidao.qq.com, DNS:foxue.qq.com, DNS:futsal.sports.qq.com, DNS:games.qq.com, DNS:gd.qq.com, DNS:golf.qq.com, DNS:gongyi.qq.com, DNS:green.news.qq.com, DNS:gy.qq.com, DNS:gz2010.qq.com, DNS:hanhan.qq.com, DNS:hb.jjj.qq.com, DNS:hb.qq.com, DNS:hea.qq.com, DNS:health.qq.com, DNS:hebei.qq.com, DNS:henan.qq.com, DNS:history.news.qq.com, DNS:history.qq.com, DNS:hn.qq.com, DNS:hoop.qq.com, DNS:house.qq.com, DNS:i.match.qq.com, DNS:iaio.qq.com, DNS:iapp.xw.qq.com, DNS:ilike.qq.com, DNS:ipad.qq.com, DNS:irs.qq.com, DNS:it.qq.com, DNS:jiaju.qq.com, DNS:jjj.qq.com, DNS:joke.qq.com, DNS:joy.qq.com, DNS:js.qq.com, DNS:kbs.qq.com, DNS:kbs.sports.qq.com, DNS:kepu.qq.com, DNS:kid.qq.com, DNS:kxyx.qq.com, DNS:learning.qq.com, DNS:lequipe.qq.com, DNS:libs.qq.com, DNS:liuxiang.qq.com, DNS:ln.qq.com, DNS:luxury.qq.com, DNS:ly.qq.com, DNS:m.nbachina.qq.com, DNS:mapp.qq.com, DNS:media.news.qq.com, DNS:media.qq.com, DNS:mil.qq.com, DNS:mini.qq.com, DNS:mini2015.qq.com, DNS:minisite.qq.com, DNS:minisite2009.qq.com, DNS:minisite2012.qq.com, DNS:money.finance.qq.com, DNS:money.qq.com, DNS:nba.sports.qq.com, DNS:nba.stats.qq.com, DNS:nbachina.qq.com, DNS:new.qq.com, DNS:news.qq.com, DNS:newsapp.qq.com, DNS:o.xw.qq.com, DNS:panel.qq.com, DNS:piu.qq.com, DNS:privacy.qq.com, DNS:qos.report.qq.com, DNS:rain.qq.com, DNS:re.qq.com, DNS:report.news.qq.com, DNS:rss.qq.com, DNS:ru.qq.com, DNS:ru.rushidao.qq.com, DNS:rufodao.qq.com, DNS:sh.qq.com, DNS:soccer.qq.com, DNS:soccer.stats.qq.com, DNS:society.qq.com, DNS:space.qq.com, DNS:sports.qq.com, DNS:stats.2016.qq.com, DNS:steve-jobs.qq.com, DNS:stock.qq.com, DNS:super.dw.qq.com, DNS:sz.qq.com, DNS:t.news.qq.com, DNS:tech.qq.com, DNS:thinker.qq.com, DNS:thr.qq.com, DNS:tianqi.qq.com, DNS:time.qq.com, DNS:tj.jjj.qq.com, DNS:tj.qq.com, DNS:tnw.qq.com, DNS:torch.2011.qq.com, DNS:trend.cq.qq.com, DNS:v.ent.qq.com, DNS:v.fashion.qq.com, DNS:v.news.qq.com, DNS:v.sports.qq.com, DNS:value.qq.com, DNS:vhot.qq.com, DNS:view.news.qq.com, DNS:view.yutu.qq.com, DNS:vip.sports.qq.com, DNS:vlike.qq.com, DNS:vs.qq.com, DNS:w.auto.qq.com, DNS:wc.qq.com, DNS:wcba.sports.qq.com, DNS:weather.news.qq.com, DNS:weather.qq.com, DNS:wimbledon.qq.com, DNS:world.qq.com, DNS:worldcup.qq.com, DNS:www.worldcup.qq.com, DNS:wxn.qq.com, DNS:xian.news.qq.com, DNS:xian.qq.com, DNS:xnc.sports.qq.com, DNS:xprize.qq.com, DNS:xw.qq.com, DNS:xw.tianqi.qq.com, DNS:xw.time.qq.com, DNS:yslp.qq.com, DNS:zj.qq.com, DNS:zp.cq.qq.com, DNS:zt.news.qq.com, DNS:qq.com
+Not valid before: 2019-08-16T00:00:00
+Not valid after:  2020-08-19T12:00:00">
+          <table key="subject"> 
+            <elem key="stateOrProvinceName">Guangdong Sheng</elem>  
+            <elem key="countryName">CN</elem>  
+            <elem key="localityName">Shenzhen</elem>  
+            <elem key="organizationName">Shenzhen Tencent Computer Systems Company Limited</elem>  
+            <elem key="commonName">www.qq.com</elem>  
+            <elem key="organizationalUnitName">R&amp;D</elem> 
+          </table>  
+          <table key="issuer"> 
+            <elem key="countryName">US</elem>  
+            <elem key="organizationName">DigiCert Inc</elem>  
+            <elem key="commonName">Secure Site CA G2</elem>  
+            <elem key="organizationalUnitName">www.digicert.com</elem> 
+          </table>  
+          <table key="pubkey"> 
+            <elem key="bits">2048</elem>  
+            <elem key="exponent">userdata: 0384E720</elem>  
+            <elem key="type">rsa</elem>  
+            <elem key="modulus">userdata: 0384EBF8</elem> 
+          </table>  
+          <table key="extensions"> 
+            <table> 
+              <elem key="value">keyid:C4:11:7E:88:40:86:C2:41:BF:65:F3:1A:E1:B4:53:40:A3:AB:EC:7D</elem>  
+              <elem key="name">X509v3 Authority Key Identifier</elem> 
+            </table>  
+            <table> 
+              <elem key="value">87:EC:97:9F:3A:38:8A:E4:DF:74:6C:47:12:76:48:2E:64:C1:AE:91</elem>  
+              <elem key="name">X509v3 Subject Key Identifier</elem> 
+            </table>  
+            <table> 
+              <elem key="value">DNS:www.qq.com, DNS:10years.qq.com, DNS:2010.qq.com, DNS:2011.qq.com, DNS:2012.qq.com, DNS:2014.qq.com, DNS:2016.qq.com, DNS:2018.qq.com, DNS:3g.tech.qq.com, DNS:61.qq.com, DNS:arsenal.qq.com, DNS:astro.fashion.qq.com, DNS:astro.lady.qq.com, DNS:astro.qq.com, DNS:australianopen.qq.com, DNS:auto.qq.com, DNS:baby.qq.com, DNS:bar.tech.qq.com, DNS:bbs.list.qq.com, DNS:bella.qq.com, DNS:bi.qq.com, DNS:biznext.qq.com, DNS:bj.jjj.qq.com, DNS:bj.qq.com, DNS:bj2022.qq.com, DNS:boao.qq.com, DNS:business.qq.com, DNS:bwf.sports.qq.com, DNS:campus.qq.com, DNS:cd.qq.com, DNS:cdpanda.qq.com, DNS:china.qq.com, DNS:city.qq.com, DNS:cost.qq.com, DNS:cp.qq.com, DNS:cq.qq.com, DNS:cul.qq.com, DNS:cy.qq.com, DNS:dajia.qq.com, DNS:dalian.qq.com, DNS:dao.qq.com, DNS:dao.rushidao.qq.com, DNS:data.auto.qq.com, DNS:data.re.qq.com, DNS:digi.qq.com, DNS:digi.tech.qq.com, DNS:economy.qq.com, DNS:edu.qq.com, DNS:en.2012.qq.com, DNS:ent.qq.com, DNS:euro2012.qq.com, DNS:fact.qq.com, DNS:fans.sports.qq.com, DNS:fashion.qq.com, DNS:fcbarcelona.qq.com, DNS:finance.qq.com, DNS:fj.qq.com, DNS:fo.rushidao.qq.com, DNS:foxue.qq.com, DNS:futsal.sports.qq.com, DNS:games.qq.com, DNS:gd.qq.com, DNS:golf.qq.com, DNS:gongyi.qq.com, DNS:green.news.qq.com, DNS:gy.qq.com, DNS:gz2010.qq.com, DNS:hanhan.qq.com, DNS:hb.jjj.qq.com, DNS:hb.qq.com, DNS:hea.qq.com, DNS:health.qq.com, DNS:hebei.qq.com, DNS:henan.qq.com, DNS:history.news.qq.com, DNS:history.qq.com, DNS:hn.qq.com, DNS:hoop.qq.com, DNS:house.qq.com, DNS:i.match.qq.com, DNS:iaio.qq.com, DNS:iapp.xw.qq.com, DNS:ilike.qq.com, DNS:ipad.qq.com, DNS:irs.qq.com, DNS:it.qq.com, DNS:jiaju.qq.com, DNS:jjj.qq.com, DNS:joke.qq.com, DNS:joy.qq.com, DNS:js.qq.com, DNS:kbs.qq.com, DNS:kbs.sports.qq.com, DNS:kepu.qq.com, DNS:kid.qq.com, DNS:kxyx.qq.com, DNS:learning.qq.com, DNS:lequipe.qq.com, DNS:libs.qq.com, DNS:liuxiang.qq.com, DNS:ln.qq.com, DNS:luxury.qq.com, DNS:ly.qq.com, DNS:m.nbachina.qq.com, DNS:mapp.qq.com, DNS:media.news.qq.com, DNS:media.qq.com, DNS:mil.qq.com, DNS:mini.qq.com, DNS:mini2015.qq.com, DNS:minisite.qq.com, DNS:minisite2009.qq.com, DNS:minisite2012.qq.com, DNS:money.finance.qq.com, DNS:money.qq.com, DNS:nba.sports.qq.com, DNS:nba.stats.qq.com, DNS:nbachina.qq.com, DNS:new.qq.com, DNS:news.qq.com, DNS:newsapp.qq.com, DNS:o.xw.qq.com, DNS:panel.qq.com, DNS:piu.qq.com, DNS:privacy.qq.com, DNS:qos.report.qq.com, DNS:rain.qq.com, DNS:re.qq.com, DNS:report.news.qq.com, DNS:rss.qq.com, DNS:ru.qq.com, DNS:ru.rushidao.qq.com, DNS:rufodao.qq.com, DNS:sh.qq.com, DNS:soccer.qq.com, DNS:soccer.stats.qq.com, DNS:society.qq.com, DNS:space.qq.com, DNS:sports.qq.com, DNS:stats.2016.qq.com, DNS:steve-jobs.qq.com, DNS:stock.qq.com, DNS:super.dw.qq.com, DNS:sz.qq.com, DNS:t.news.qq.com, DNS:tech.qq.com, DNS:thinker.qq.com, DNS:thr.qq.com, DNS:tianqi.qq.com, DNS:time.qq.com, DNS:tj.jjj.qq.com, DNS:tj.qq.com, DNS:tnw.qq.com, DNS:torch.2011.qq.com, DNS:trend.cq.qq.com, DNS:v.ent.qq.com, DNS:v.fashion.qq.com, DNS:v.news.qq.com, DNS:v.sports.qq.com, DNS:value.qq.com, DNS:vhot.qq.com, DNS:view.news.qq.com, DNS:view.yutu.qq.com, DNS:vip.sports.qq.com, DNS:vlike.qq.com, DNS:vs.qq.com, DNS:w.auto.qq.com, DNS:wc.qq.com, DNS:wcba.sports.qq.com, DNS:weather.news.qq.com, DNS:weather.qq.com, DNS:wimbledon.qq.com, DNS:world.qq.com, DNS:worldcup.qq.com, DNS:www.worldcup.qq.com, DNS:wxn.qq.com, DNS:xian.news.qq.com, DNS:xian.qq.com, DNS:xnc.sports.qq.com, DNS:xprize.qq.com, DNS:xw.qq.com, DNS:xw.tianqi.qq.com, DNS:xw.time.qq.com, DNS:yslp.qq.com, DNS:zj.qq.com, DNS:zp.cq.qq.com, DNS:zt.news.qq.com, DNS:qq.com</elem>  
+              <elem key="name">X509v3 Subject Alternative Name</elem> 
+            </table>  
+            <table> 
+              <elem key="value">Digital Signature, Key Encipherment</elem>  
+              <elem key="critical">true</elem>  
+              <elem key="name">X509v3 Key Usage</elem> 
+            </table>  
+            <table> 
+              <elem key="value">TLS Web Server Authentication, TLS Web Client Authentication</elem>  
+              <elem key="name">X509v3 Extended Key Usage</elem> 
+            </table>  
+            <table> 
+              <elem key="value">Full Name: URI:http://crl3.digicert.com/SecureSiteCAG2.crl Full Name: URI:http://crl4.digicert.com/SecureSiteCAG2.crl</elem>  
+              <elem key="name">X509v3 CRL Distribution Points</elem> 
+            </table>  
+            <table> 
+              <elem key="value">Policy: 2.16.840.1.114412.1.1 CPS: https://www.digicert.com/CPS Policy: 2.23.140.1.2.2</elem>  
+              <elem key="name">X509v3 Certificate Policies</elem> 
+            </table>  
+            <table> 
+              <elem key="value">OCSP - URI:http://ocsp.dcocsp.cn CA Issuers - URI:http://crl.digicert-cn.com/SecureSiteCAG2.crt</elem>  
+              <elem key="name">Authority Information Access</elem> 
+            </table>  
+            <table> 
+              <elem key="value">CA:FALSE</elem>  
+              <elem key="critical">true</elem>  
+              <elem key="name">X509v3 Basic Constraints</elem> 
+            </table>  
+            <table> 
+              <elem key="value">Signed Certificate Timestamp: Version : v1(0) Log ID : EE:4B:BD:B7:75:CE:60:BA:E1:42:69:1F:AB:E1:9E:66: A3:0F:7E:5F:B0:72:D8:83:00:C4:7B:89:7A:A8:FD:CB Timestamp : Aug 16 04:42:24.601 2019 GMT Extensions: none Signature : ecdsa-with-SHA256 30:45:02:20:6C:19:EB:0B:11:5C:26:8E:87:44:65:11: 72:91:10:7E:B9:AD:0A:D1:EB:77:70:61:F9:39:B9:45: B6:9B:8A:06:02:21:00:C7:D6:A5:E4:2B:E6:38:41:D6: C9:55:D1:0F:0B:79:51:BA:A0:45:E6:C5:96:79:DE:34: 64:7D:23:DF:A9:02:CA Signed Certificate Timestamp: Version : v1(0) Log ID : 87:75:BF:E7:59:7C:F8:8C:43:99:5F:BD:F3:6E:FF:56: 8D:47:56:36:FF:4A:B5:60:C1:B4:EA:FF:5E:A0:83:0F Timestamp : Aug 16 04:42:24.732 2019 GMT Extensions: none Signature : ecdsa-with-SHA256 30:44:02:20:67:24:99:C3:79:AF:26:28:C5:BD:AF:49: BE:96:DB:C2:AB:99:80:E3:A2:BD:54:34:AD:4B:BF:61: 6A:BC:AF:57:02:20:19:1B:EC:9B:90:23:0C:FB:CD:27: 87:77:D8:D0:31:C6:29:BB:3B:4A:F3:C0:C4:04:F6:44: FF:00:DF:5A:AA:37</elem>  
+              <elem key="name">CT Precertificate SCTs</elem> 
+            </table> 
+          </table>  
+          <elem key="sig_algo">sha256WithRSAEncryption</elem>  
+          <table key="validity"> 
+            <elem key="notBefore">2019-08-16T00:00:00</elem>  
+            <elem key="notAfter">2020-08-19T12:00:00</elem> 
+          </table>  
+          <elem key="md5">57a1fc306dbe26bd3be369fbc35e98b6</elem>  
+          <elem key="sha1">39194e545477f4d8f0b1908acd7ae96f9867b9e2</elem>  
+          <elem key="pem">-----BEGIN CERTIFICATE----- MIIROzCCECOgAwIBAgIQCHtGjysjHCK0GhceTMWcazANBgkqhkiG9w0BAQsFADBb MQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3 d3cuZGlnaWNlcnQuY29tMRowGAYDVQQDExFTZWN1cmUgU2l0ZSBDQSBHMjAeFw0x OTA4MTYwMDAwMDBaFw0yMDA4MTkxMjAwMDBaMIGZMQswCQYDVQQGEwJDTjEYMBYG A1UECBMPR3Vhbmdkb25nIFNoZW5nMREwDwYDVQQHEwhTaGVuemhlbjE6MDgGA1UE ChMxU2hlbnpoZW4gVGVuY2VudCBDb21wdXRlciBTeXN0ZW1zIENvbXBhbnkgTGlt aXRlZDEMMAoGA1UECwwDUiZEMRMwEQYDVQQDEwp3d3cucXEuY29tMIIBIjANBgkq hkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAq5FEkvyBqbjoYACSkthoNu6S5ID7IlZC YyJeOBc24QEN9u9vDHjNd61Ip4PA4igNyOrwTk44z5Ei4rTGxfRSiNwIZCRvRZJW nxX8U+6huoL/QdnEiMoFPfwbckJ8oh47abqDGc6d2r7JmKRrpIne/t/cxhVdO6A5 Rikjz4u/fCzz9Qu1Xe4wYFBy1quRzLGfyHOB8M0jqRcieW1WWet5gMWApd6OS+zO Bp2eKF9hKpBsxDwQ0HHlIsq2iL+Zj5uqbn5f02nDsQTsYEt6dL8Mp+OxLotIY67B YeO4ejdg4phkV4cMy0bLeHuzeXhrsQYPM8zYa1YA+BRUpqFNE4kSIQIDAQABo4IN ujCCDbYwHwYDVR0jBBgwFoAUxBF+iECGwkG/ZfMa4bRTQKOr7H0wHQYDVR0OBBYE FIfsl586OIrk33RsRxJ2SC5kwa6RMIILAQYDVR0RBIIK+DCCCvSCCnd3dy5xcS5j b22CDjEweWVhcnMucXEuY29tggsyMDEwLnFxLmNvbYILMjAxMS5xcS5jb22CCzIw MTIucXEuY29tggsyMDE0LnFxLmNvbYILMjAxNi5xcS5jb22CCzIwMTgucXEuY29t gg4zZy50ZWNoLnFxLmNvbYIJNjEucXEuY29tgg5hcnNlbmFsLnFxLmNvbYIUYXN0 cm8uZmFzaGlvbi5xcS5jb22CEWFzdHJvLmxhZHkucXEuY29tggxhc3Ryby5xcS5j b22CFWF1c3RyYWxpYW5vcGVuLnFxLmNvbYILYXV0by5xcS5jb22CC2JhYnkucXEu Y29tgg9iYXIudGVjaC5xcS5jb22CD2Jicy5saXN0LnFxLmNvbYIMYmVsbGEucXEu Y29tggliaS5xcS5jb22CDmJpem5leHQucXEuY29tgg1iai5qamoucXEuY29tggli ai5xcS5jb22CDWJqMjAyMi5xcS5jb22CC2JvYW8ucXEuY29tgg9idXNpbmVzcy5x cS5jb22CEWJ3Zi5zcG9ydHMucXEuY29tgg1jYW1wdXMucXEuY29tggljZC5xcS5j b22CDmNkcGFuZGEucXEuY29tggxjaGluYS5xcS5jb22CC2NpdHkucXEuY29tggtj b3N0LnFxLmNvbYIJY3AucXEuY29tggljcS5xcS5jb22CCmN1bC5xcS5jb22CCWN5 LnFxLmNvbYIMZGFqaWEucXEuY29tgg1kYWxpYW4ucXEuY29tggpkYW8ucXEuY29t ghNkYW8ucnVzaGlkYW8ucXEuY29tghBkYXRhLmF1dG8ucXEuY29tgg5kYXRhLnJl LnFxLmNvbYILZGlnaS5xcS5jb22CEGRpZ2kudGVjaC5xcS5jb22CDmVjb25vbXku cXEuY29tggplZHUucXEuY29tgg5lbi4yMDEyLnFxLmNvbYIKZW50LnFxLmNvbYIP ZXVybzIwMTIucXEuY29tggtmYWN0LnFxLmNvbYISZmFucy5zcG9ydHMucXEuY29t gg5mYXNoaW9uLnFxLmNvbYISZmNiYXJjZWxvbmEucXEuY29tgg5maW5hbmNlLnFx LmNvbYIJZmoucXEuY29tghJmby5ydXNoaWRhby5xcS5jb22CDGZveHVlLnFxLmNv bYIUZnV0c2FsLnNwb3J0cy5xcS5jb22CDGdhbWVzLnFxLmNvbYIJZ2QucXEuY29t ggtnb2xmLnFxLmNvbYINZ29uZ3lpLnFxLmNvbYIRZ3JlZW4ubmV3cy5xcS5jb22C CWd5LnFxLmNvbYINZ3oyMDEwLnFxLmNvbYINaGFuaGFuLnFxLmNvbYINaGIuampq LnFxLmNvbYIJaGIucXEuY29tggpoZWEucXEuY29tgg1oZWFsdGgucXEuY29tggxo ZWJlaS5xcS5jb22CDGhlbmFuLnFxLmNvbYITaGlzdG9yeS5uZXdzLnFxLmNvbYIO aGlzdG9yeS5xcS5jb22CCWhuLnFxLmNvbYILaG9vcC5xcS5jb22CDGhvdXNlLnFx LmNvbYIOaS5tYXRjaC5xcS5jb22CC2lhaW8ucXEuY29tgg5pYXBwLnh3LnFxLmNv bYIMaWxpa2UucXEuY29tggtpcGFkLnFxLmNvbYIKaXJzLnFxLmNvbYIJaXQucXEu Y29tggxqaWFqdS5xcS5jb22CCmpqai5xcS5jb22CC2pva2UucXEuY29tggpqb3ku cXEuY29tgglqcy5xcS5jb22CCmticy5xcS5jb22CEWticy5zcG9ydHMucXEuY29t ggtrZXB1LnFxLmNvbYIKa2lkLnFxLmNvbYILa3h5eC5xcS5jb22CD2xlYXJuaW5n LnFxLmNvbYIObGVxdWlwZS5xcS5jb22CC2xpYnMucXEuY29tgg9saXV4aWFuZy5x cS5jb22CCWxuLnFxLmNvbYINbHV4dXJ5LnFxLmNvbYIJbHkucXEuY29tghFtLm5i YWNoaW5hLnFxLmNvbYILbWFwcC5xcS5jb22CEW1lZGlhLm5ld3MucXEuY29tggxt ZWRpYS5xcS5jb22CCm1pbC5xcS5jb22CC21pbmkucXEuY29tgg9taW5pMjAxNS5x cS5jb22CD21pbmlzaXRlLnFxLmNvbYITbWluaXNpdGUyMDA5LnFxLmNvbYITbWlu aXNpdGUyMDEyLnFxLmNvbYIUbW9uZXkuZmluYW5jZS5xcS5jb22CDG1vbmV5LnFx LmNvbYIRbmJhLnNwb3J0cy5xcS5jb22CEG5iYS5zdGF0cy5xcS5jb22CD25iYWNo aW5hLnFxLmNvbYIKbmV3LnFxLmNvbYILbmV3cy5xcS5jb22CDm5ld3NhcHAucXEu Y29tggtvLnh3LnFxLmNvbYIMcGFuZWwucXEuY29tggpwaXUucXEuY29tgg5wcml2 YWN5LnFxLmNvbYIRcW9zLnJlcG9ydC5xcS5jb22CC3JhaW4ucXEuY29tgglyZS5x cS5jb22CEnJlcG9ydC5uZXdzLnFxLmNvbYIKcnNzLnFxLmNvbYIJcnUucXEuY29t ghJydS5ydXNoaWRhby5xcS5jb22CDnJ1Zm9kYW8ucXEuY29tgglzaC5xcS5jb22C DXNvY2Nlci5xcS5jb22CE3NvY2Nlci5zdGF0cy5xcS5jb22CDnNvY2lldHkucXEu Y29tggxzcGFjZS5xcS5jb22CDXNwb3J0cy5xcS5jb22CEXN0YXRzLjIwMTYucXEu Y29tghFzdGV2ZS1qb2JzLnFxLmNvbYIMc3RvY2sucXEuY29tgg9zdXBlci5kdy5x cS5jb22CCXN6LnFxLmNvbYINdC5uZXdzLnFxLmNvbYILdGVjaC5xcS5jb22CDnRo aW5rZXIucXEuY29tggp0aHIucXEuY29tgg10aWFucWkucXEuY29tggt0aW1lLnFx LmNvbYINdGouampqLnFxLmNvbYIJdGoucXEuY29tggp0bncucXEuY29tghF0b3Jj aC4yMDExLnFxLmNvbYIPdHJlbmQuY3EucXEuY29tggx2LmVudC5xcS5jb22CEHYu ZmFzaGlvbi5xcS5jb22CDXYubmV3cy5xcS5jb22CD3Yuc3BvcnRzLnFxLmNvbYIM dmFsdWUucXEuY29tggt2aG90LnFxLmNvbYIQdmlldy5uZXdzLnFxLmNvbYIQdmll dy55dXR1LnFxLmNvbYIRdmlwLnNwb3J0cy5xcS5jb22CDHZsaWtlLnFxLmNvbYIJ dnMucXEuY29tgg13LmF1dG8ucXEuY29tggl3Yy5xcS5jb22CEndjYmEuc3BvcnRz LnFxLmNvbYITd2VhdGhlci5uZXdzLnFxLmNvbYIOd2VhdGhlci5xcS5jb22CEHdp bWJsZWRvbi5xcS5jb22CDHdvcmxkLnFxLmNvbYIPd29ybGRjdXAucXEuY29tghN3 d3cud29ybGRjdXAucXEuY29tggp3eG4ucXEuY29tghB4aWFuLm5ld3MucXEuY29t ggt4aWFuLnFxLmNvbYIReG5jLnNwb3J0cy5xcS5jb22CDXhwcml6ZS5xcS5jb22C CXh3LnFxLmNvbYIQeHcudGlhbnFpLnFxLmNvbYIOeHcudGltZS5xcS5jb22CC3lz bHAucXEuY29tggl6ai5xcS5jb22CDHpwLmNxLnFxLmNvbYIOenQubmV3cy5xcS5j b22CBnFxLmNvbTAOBgNVHQ8BAf8EBAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUHAwEG CCsGAQUFBwMCMG8GA1UdHwRoMGYwMaAvoC2GK2h0dHA6Ly9jcmwzLmRpZ2ljZXJ0 LmNvbS9TZWN1cmVTaXRlQ0FHMi5jcmwwMaAvoC2GK2h0dHA6Ly9jcmw0LmRpZ2lj ZXJ0LmNvbS9TZWN1cmVTaXRlQ0FHMi5jcmwwTAYDVR0gBEUwQzA3BglghkgBhv1s AQEwKjAoBggrBgEFBQcCARYcaHR0cHM6Ly93d3cuZGlnaWNlcnQuY29tL0NQUzAI BgZngQwBAgIwbAYIKwYBBQUHAQEEYDBeMCEGCCsGAQUFBzABhhVodHRwOi8vb2Nz cC5kY29jc3AuY24wOQYIKwYBBQUHMAKGLWh0dHA6Ly9jcmwuZGlnaWNlcnQtY24u Y29tL1NlY3VyZVNpdGVDQUcyLmNydDAMBgNVHRMBAf8EAjAAMIIBAwYKKwYBBAHW eQIEAgSB9ASB8QDvAHYA7ku9t3XOYLrhQmkfq+GeZqMPfl+wctiDAMR7iXqo/csA AAFsmLvd2QAABAMARzBFAiBsGesLEVwmjodEZRFykRB+ua0K0et3cGH5OblFtpuK BgIhAMfWpeQr5jhB1slV0Q8LeVG6oEXmxZZ53jRkfSPfqQLKAHUAh3W/51l8+IxD mV+9827/Vo1HVjb/SrVgwbTq/16ggw8AAAFsmLveXAAABAMARjBEAiBnJJnDea8m KMW9r0m+ltvCq5mA46K9VDStS79haryvVwIgGRvsm5AjDPvNJ4d32NAxxim7O0rz wMQE9kT/AN9aqjcwDQYJKoZIhvcNAQELBQADggEBAFCY9/fMylo8uClbGqYTPn3a 0hgiGGHhCaUzxGeV6rNrGb+TMXlkCCSZpzepmSul5EfLkspdu2HB+05uIab3wuKx /BMLC3JrpWsAcUzDe+IbiyHqXbgUgfDW87Xjnrxm0WLfg8CDYLU6GAYhv3u/WmGe 8JuOkBuAM+NHHXZUqWgbgP9icJUPCfbNe6uthyHxPhzfdyIqmno9/fUa+HzXCbx0 69zcIFnh5U1p1dnIPDIWIJUbYowFCD6l6SkvaHIEYyNoCZgRHu0abV2ZGT/JOEXZ AJXD9hhgsi9DlvMIuO3xq0BbTB3wcneXJjcQmkH6+DfaPzNE+bKYk78n9dwNN2A= -----END CERTIFICATE-----</elem> 
+        </script>
+        <script id="ssl-date" output="TLS randomness does not represent time"/>
+        <script id="tls-alpn" output="
+  http/1.1">
+          <elem>http/1.1</elem> 
+        </script>
+        <script id="tls-nextprotoneg" output="
+  h2
+  http/1.1">
+          <elem>h2</elem>  
+          <elem>http/1.1</elem> 
+        </script>
+      </port>  
+      <port protocol="tcp" portid="8080">
+        <state state="open" reason="syn-ack" reason_ttl="56"/>
+        <service name="http-proxy" method="table" conf="3"/>
+      </port> 
+    </ports>  
+    <times srtt="2640" rttvar="6077" to="100000"/> 
+  </host>  
+  <runstats>
+    <finished time="1586953415" timestr="Wed Apr 15 20:23:35 2020" elapsed="37.67" summary="Nmap done at Wed Apr 15 20:23:35 2020; 2 IP addresses (2 hosts up) scanned in 37.67 seconds" exit="success"/>
+    <hosts up="2" down="0" total="2"/> 
+  </runstats> 
+</nmaprun>
