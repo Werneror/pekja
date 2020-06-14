@@ -1,16 +1,16 @@
 # pekja
 
-SRC情报收集管理系统。
+SRC 情报收集管理系统。
 
-测试中，Bug很多，请谨慎使用。。。
+测试中，Bug 很多，请谨慎使用。。。
 
 ## 简介
 
-在SRC漏洞挖掘中情报至关重要，且需要进行**持续**的情报收集，以达到新资产一上线就被感知的效果。新增的资产往往最容易出现漏洞。
+在 SRC 漏洞挖掘中情报至关重要，且需要进行**持续**的情报收集，以达到新资产一上线就被感知的效果。新增的资产往往最容易出现漏洞。
 目前已经有了各种各样的情报收集工具，有些专注于某一种情报的收集，如只进行子域名收集，有些则可以收集多种不同的情报。
 但不同工具的输出格式五花八门，缺乏一种简单的方式将不同工具的输出整理汇总，并准确找出新增资产。
 
-为了解决这些问题设计开发了pekja。pekja可以通过Web界面调度运行各个情报收集工具，解析他们的输出，将结果以统一的格式保存到数据库中；
+为了解决这些问题设计开发了 pekja。pekja 可以通过 Web 界面调度运行各个情报收集工具，解析他们的输出，将结果以统一的格式保存到数据库中；
 支持将一个工具的输出作为另一个工具的输入；支持通过邮件发送每天新增资产的报告，并提供一些用于查看数据概况和进行调试的Web页面。
 
 ### 技术栈
@@ -22,7 +22,7 @@ SRC情报收集管理系统。
 
 ## 截图
 
-### Web界面截图
+### Web 界面截图
 
 ![Web界面截图](screenshot/pekja-web.png)
 
@@ -33,26 +33,26 @@ SRC情报收集管理系统。
 
 ## 支持的工具
 
-在pekja中，一个工具只专注于收集一种情报。
-若某个工具通过添加不同的参数可以收集不同的情报，则在pekja中将它视作多个工具。
+在 pekja 中，一个工具只专注于收集一种情报。
+若某个工具通过添加不同的参数可以收集不同的情报，则在 pekja 中将它视作多个工具。
 
 不同格式的工具输出格式各不相同，支持一个工具便要有能解析该工具输出的`解析类`。
 目前支持的工具如下表所示。
 
 | 工具名| 收集的情报类型 | 解析类名 | 工具项目链接 | 版本 |
 |:----:|:----:|:----:|:----:|:----:|
-| Nmap SYN扫描 | TCP端口 | NmapSynScanParser | [Nmap](https://nmap.org/) | 7.7.0 |
-| Nmap UDP端口扫描 | UDP端口 | NmapUdpScanParser | [Nmap](https://nmap.org/) | 7.7.0 |
-| Censys邮箱采集 | 邮箱 | CensysEnumerationEmail | [censys-enumeration](https://github.com/0xbharath/censys-enumeration) | 10d42fa3 |
+| Nmap SYN 扫描 | TCP 端口 | NmapSynScanParser | [Nmap](https://nmap.org/) | 7.7.0 |
+| Nmap UDP 端口扫描 | UDP 端口 | NmapUdpScanParser | [Nmap](https://nmap.org/) | 7.7.0 |
+| Censys 邮箱采集 | 邮箱 | CensysEnumerationEmail | [censys-enumeration](https://github.com/0xbharath/censys-enumeration) | 10d42fa3 |
 | Sublist3r | 域名 | Sublist3rParser | [Sublist3r](https://github.com/aboul3la/Sublist3r) | 61ebf36 |
-| OneForAll子域名收集 | 域名 | OneForAllParser | [OneForAll](https://github.com/shmilylty/OneForAll) | b51236a |
+| OneForAll 子域名收集 | 域名 | OneForAllParser | [OneForAll](https://github.com/shmilylty/OneForAll) | b51236a |
 | CTFR | 域名 | CTFRParser | [CTFRParser](https://github.com/UnaPibaGeek/ctfr) | 86a804a |
 | lijiejie/subDomainsBrute | 域名 | LijiejieSubDomainsBrute | [subDomainsBrute](https://github.com/lijiejie/subDomainsBrute) | bac5eb3 |
-| Censys子域名采集 | 域名 | CensysEnumerationDomain | [censys-enumeration](https://github.com/0xbharath/censys-enumeration) | 10d42fa3 |
-| Nmap子域名爆破 | 域名 | NmapDnsBruteParser | [Nmap](https://nmap.org/) | 7.7.0 |
-| Nmap HTTP扫描 | 网站 | NmapHTTPScanParser | [Nmap](https://nmap.org/) | 7.7.0 |
+| Censys 子域名采集 | 域名 | CensysEnumerationDomain | [censys-enumeration](https://github.com/0xbharath/censys-enumeration) | 10d42fa3 |
+| Nmap 子域名爆破 | 域名 | NmapDnsBruteParser | [Nmap](https://nmap.org/) | 7.7.0 |
+| Nmap HTTP 扫描 | 网站 | NmapHTTPScanParser | [Nmap](https://nmap.org/) | 7.7.0 |
 
-注：OneForAll子域名收集工具有运行完毕后无法退出[BUG](https://github.com/shmilylty/OneForAll/issues/59)，待修复。
+注：OneForAll 子域名收集工具有运行完毕后无法退出的 [BUG](https://github.com/shmilylty/OneForAll/issues/59)，待修复。
 
 ## 名词解释
 
@@ -62,16 +62,16 @@ SRC情报收集管理系统。
 
 ## 安装
 
-pekja在Python 3.8.0下进行开发和测试。
+pekja 在 Python 3.8.0 下进行开发和测试。
 
-在调度工具时使用了crontab，故不支持Windows操作系统。
-在Windows操作系统中可以正常运行Web服务，也可以添加任务。
+在调度工具时使用了 Crontab，故不支持 Windows 操作系统。
+在 Windows 操作系统中可以正常运行 Web 服务，也可以添加任务。
 但只是将需要按时执行的命令写入到`data/windows_crontab.txt`文件中，并不会真正执行。
 
-有两种安装方法，使用Docker安装或手工安装。手工安装时除了安装pekja外还需要逐个安装支持的工具，
-安装后还需要逐个核对、修改`工具表`中各个工具的`调用命令`（详情见后文），较为耗时耗力，故推荐使用Docker安装。
+有两种安装方法，使用 Docker 安装或手工安装。手工安装时除了安装 pekja 外还需要逐个安装支持的工具，
+安装后还需要逐个核对、修改`工具表`中各个工具的`调用命令`（详情见后文），较为耗时耗力，故推荐使用 Docker 安装。
 
-### 方法一：使用Docker
+### 方法一：使用 Docker
 
 下载项目代码并进入项目目录：
 
@@ -80,7 +80,7 @@ git clone https://github.com/Werneror/pekja.git
 cd pekja
 ```
 
-构建Docker容器：
+构建 Docker 容器：
 
 ```bash
 docker build -t pekja .
@@ -127,12 +127,12 @@ chmod +x docker/update.sh
 ```
 
 若某次更新改动过大直接使用自动更新脚本可能会失败。
-这时需要先通过Web界面管理后台的批量导出功能备份数据，然后删除数据目录/opt/pekja中的所有文件，最后再运行更新脚本。
+这时需要先通过 Web 界面管理后台的批量导出功能备份数据，然后删除数据目录`/opt/pekja`中的所有文件，最后再运行更新脚本。
 重新导入数据时需按照`工具`->`项目`->`任务`->`批量任务`->`记录`的顺序进行。
 
 ### 方法二：手动安装
 
-#### 安装pekja
+#### 安装 pekja
 
 下载项目代码并进入项目目录：
 
@@ -147,7 +147,7 @@ cd pekja
 python -m pip install -r requirements.txt
 ```
 
-默认使用Sqlite3作为数据库，故可直接创建数据表：
+默认使用 Sqlite3 作为数据库，故可直接创建数据表：
 
 ```bash
 python manage.py migrate
@@ -179,19 +179,19 @@ EMAIL_HOST_USER = 'pekja@werner.wiki'    # 发件邮箱（用户名）
 EMAIL_HOST_PASSWORD = '**************'    # 密码
 ```
 
-运行Web服务：
+运行 Web 服务：
 
 ```bash
 python manage.py runserver 127.0.0.1:8000
 ```
 
-若安装成功，在浏览器中访问[http://127.0.0.1:8000]()可以看到登录页面，用刚刚创建的用户可以登录进入Web界面。
-点击Web界面右上角的用户名，在弹出菜单中点击`管理后台`按钮，可进入到管理后台。
+若安装成功，在浏览器中访问[http://127.0.0.1:8000]()可以看到登录页面，用刚刚创建的用户可以登录进入 Web 界面。
+点击 Web 界面右上角的用户名，在弹出菜单中点击`管理后台`按钮，可进入到管理后台。
 
 #### 安装工具
 
 在管理后台的`首页`→`Pekja`→`工具`中可以看到目前支持的所用工具。若想使用其中的某个工具，需要打开对应工具的`项目链接`，
-自行安装该工具，最好能安装`工具`中指定的版本。安装完成后，还需根据工具实际路径修改`调用命令`，确保在crontab中可以成功调用。
+自行安装该工具，最好能安装`工具`中指定的版本。安装完成后，还需根据工具实际路径修改`调用命令`，确保在 Crontab 中可以成功调用。
 
 `工具`中各个字段的含义和作用说明如下：
 
@@ -216,7 +216,7 @@ python manage.py runserver 127.0.0.1:8000
 在管理后台的`首页`→`Pekja`→`项目`中可以查看和添加`项目`，各个字段的含义和作用说明如下：
 
 - 项目名：项目的名字，可以是一家公司的名字
-- SRC链接：该项目对应的SRC的链接
+- SRC链接：该项目对应的 SRC 的链接
 - 备注：一些备注信息
 
 ### 添加任务
@@ -230,13 +230,13 @@ python manage.py runserver 127.0.0.1:8000
 - 工具：该任务调用的是哪个工具
 - 输入：该任务的输入是什么
 - 输入文件类型：仅`工具`的`输入参数类型`为`文件`时有效
-- 调度：crontab格式的字符串，以说明该任务应该在何时被执行
+- 调度：Crontab 格式的字符串，以说明该任务应该在何时被执行
 - 是否生效：可以选择否以替代删除
 
-每新增一条`任务`，pekja都会在crontab中新增一条对应的定时任务，
+每新增一条`任务`，pekja 都会在 Crontab 中新增一条对应的定时任务，
 定时任务的内容是替换了占位符的对应`工具`的`调用命令`和输入、输出处理命令。
-每次保存`任务`时都会更新crontab定时任务。每次更新`工具`（表）中`工具`时也会自动更新所有使用该工具的`任务`在crontab中对应的定时任务。
-但需**特别注意**通过`导入`批量导入时不会更新crontab定时任务。
+每次保存`任务`时都会更新 Crontab 定时任务。每次更新`工具`（表）中`工具`时也会自动更新所有使用该工具的`任务`在 Crontab 中对应的定时任务。
+但需**特别注意**通过`导入`批量导入时不会更新 Crontab 定时任务。
 
 `工具`的`输入参数类型`为`参数`时，会直接用`任务`的`输入`替换`工具`的`调用命令`中的`{input}`。
 
@@ -266,20 +266,20 @@ python manage.py runserver 127.0.0.1:8000
 在管理后台的`首页`→`Pekja`→`批量任务`中可以查看和添加`批量任务`，各个字段的含义和作用说明如下：
 
 - 批量任务名: 批量任务名
-- 任务1~10: 需要依次执行的任务，最多可添加10个
-- 调度：crontab格式的字符串，以说明该批量任务应该在何时被执行
+- 任务1~10: 需要依次执行的任务，最多可添加 10 个
+- 调度：Crontab 格式的字符串，以说明该批量任务应该在何时被执行
 - 是否生效：可以选择否以替代删除
 
 `批量任务`中的每个`任务`都是`任务`（表）中的一个`任务`。需先在`任务`（表）中添加`任务`，才能在`批量任务`中选择它。
 若某个`任务`只在`批量任务`中运行，可以在`任务表`中将它的`是否生效`设置为否。
 
-每新增一个`批量任务`，pekja都会在crontab中新增一条对应的定时任务，
-每次保存`批量任务`时都会更新crontab定时任务。每次更新`任务`（表）中的`任务`或`工具`（表）中`工具`时也会自动更新对应的`批量任务`在crontab中对应的定时任务。
-同样地，需要注意通过`导入`批量导入时不会更新crontab定时任务。
+每新增一个`批量任务`，pekja 都会在 Crontab 中新增一条对应的定时任务，
+每次保存`批量任务`时都会更新 Crontab 定时任务。每次更新`任务`（表）中的`任务`或`工具`（表）中`工具`时也会自动更新对应的`批量任务`在 Crontab 中对应的定时任务。
+同样地，需要注意通过`导入`批量导入时不会更新 Crontab 定时任务。
 
 ### Web界面
 
-在登录状态下访问[http://127.0.0.1:8000/]()可打开Web界面。
+在登录状态下访问[http://127.0.0.1:8000/]()可打开 Web 界面。
 Web界面分为前端页面和管理后台两部分。前面介绍了管理后台相关操作，这里介绍各个前端页面。
 
 - 数据展示
@@ -288,16 +288,16 @@ Web界面分为前端页面和管理后台两部分。前面介绍了管理后�
 - 系统设置
     - 邮件报告：显示邮件报告的收件邮箱地址和发送定时任务，并可设置发送定时任务。
 - 高级调试
-    - Crontab：显示Crontab中所有定时任务。
+    - Crontab：显示 Crontab 中所有定时任务。
     - Input：显示所有任务的输入文件，可查看内容，并可按任务ID过滤。
     - Output：显示所有任务的输出文件，可查看内容，并可按任务ID过滤。
-    - Mail：显示/var/mail/mail文件的内容。当定时任务执行出错时错误信息会写在该文件中。
+    - Mail：显示 /var/mail/mail 文件的内容。当定时任务执行出错时错误信息会写在该文件中。
     - Process：显示系统中当前所有的进程。
     - Killer：按进程号结束某个进程。
 
 ### 邮件报告
 
-若想要定时收到邮件报告，请在Web界面前端页面的`系统设置`-`邮件报告`中设置Crontab定时任务。
+若想要定时收到邮件报告，请在Web界面前端页面的`系统设置`-`邮件报告`中设置 Crontab 定时任务。
 
 
 ### 备份数据
@@ -325,7 +325,7 @@ python manage.py loaddata docker/tool.json
 
 ## 高级
 
-这部分的操作将编写代码，需要读者掌握Python 3编程语言。
+这部分的操作将编写代码，需要读者掌握 Python 3 编程语言。
 
 ### 新增对某工具的支持
 
@@ -390,7 +390,7 @@ python manage.py test parse
 
 #### 在工具表中添加工具
 
-进入到Web管理后台，在`工具表`中新增一个工具，各个字段填写的内容如下：
+进入到 Web 管理后台，在`工具表`中新增一个工具，各个字段填写的内容如下：
 
 - 工具名: Censys子域名采集
 - 项目地址: https://github.com/0xbharath/censys-enumeration/
@@ -405,18 +405,18 @@ python manage.py test parse
 
 ### 自定义Django命令
 
-此处给出所有自定义Django命令及其参数和说明。
+此处给出所有自定义 Django 命令及其参数和说明。
 
 | 命令 | 参数 | 说明 |
 |:----:|:----:|:-----:|
 | init_admin | 用户名，邮箱，密码 | 创建初始化用户，仅在没有用户时有效 |
-| cron_all_task | 无 | 把任务表中所有任务添加到crontab中 |
+| cron_all_task | 无 | 把任务表中所有任务添加到 Crontab 中 |
 | parse | 任务ID | 解析指定ID任务的输出文件，将结果保存到数据库中 |
-| update_input | 任务ID | 更新指定ID任务的输入文件，只对输入文件类型为动态的任务有效 |
+| update_input | 任务 ID | 更新指定 I D任务的输入文件，只对输入文件类型为动态的任务有效 |
 | set_record_report_cron | 文件路径 | 将文件路径所指文件的内容设置为发送邮件报告的时间 |
 | record_report | 日期（可选） | 通过邮件发送今日或某日（若有日期参数）的新增记录报告 |
 
-自定义Django命令的用法如下：
+自定义 Django 命令的用法如下：
 
 ```shell script
 python manage.py <命令> <参数1> <参数2> <...>
