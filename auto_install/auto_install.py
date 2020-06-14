@@ -23,11 +23,13 @@ def run_docker_file(dockerfile_path):
             if line.startswith('COPY '):
                 cmdline = 'cp ' + line[5:]
                 print('[+] {}'.format(cmdline))
-                os.system(cmdline)
-            elif line.endswith('RUN '):
+                if os.system(cmdline) != 0:
+                    raise RuntimeError('Return code is not 0')
+            elif line.startswith('RUN '):
                 cmdline = line[4:]
                 print('[+] {}'.format(cmdline))
-                os.system(cmdline)
+                if os.system(cmdline) != 0:
+                    raise RuntimeError('Return code is not 0')
             else:
                 print('[-] skip')
 

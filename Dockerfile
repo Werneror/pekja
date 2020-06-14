@@ -15,8 +15,11 @@ RUN apt-get install -y cron
 RUN service cron start
 RUN update-rc.d cron defaults
 
-# Install tool: nmap 7.70
-RUN apt-get install -y nmap=7.70+dfsg1-6
+# Clear /opt
+RUN rm -rf /opt
+
+# Install tool: nmap
+RUN apt-get install -y nmap
 
 # Install censys-enumeration
 RUN mkdir -p /opt/censys_enumeration

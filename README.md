@@ -137,7 +137,7 @@ chmod +x docker/update.sh
 
 ### 方法二：使用脚本安装
 
-在 Ubuntu 18.04 安装了 Python 3.8 的云服务器上下载项目代码并进入项目目录：
+在 Ubuntu 18.04 安装了 Python 3.8 和 pip 的云服务器上下载项目代码并进入项目目录：
 
 ```bash
 git clone https://github.com/Werneror/pekja.git
@@ -159,7 +159,7 @@ vim docker/env
 运行自动安装脚本：
 
 ```shell script
-sudo python auot_install/auot_install.py
+sudo python auto_install/auto_install.py
 ```
 
 启动 pekja：
