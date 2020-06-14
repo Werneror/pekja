@@ -445,7 +445,8 @@ python manage.py init_admin admin admin@example.com 123456
 
 ## 下一步计划
 
-- 添加对更多工具的支持
+- [ ] 添加对更多工具的支持。
+- [ ] 增加更轻量级的部署方式。测试发现 1G 内存的云服务器跑 Docker 有些吃力，因此希望增加更轻量级的部署方式，让 pekja 可以运行在最便宜的 VPS 上。
 
 
 ## 类似项目
