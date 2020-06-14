@@ -68,12 +68,11 @@ pekja 在 Python 3.8.0 下进行开发和测试。
 在 Windows 操作系统中可以正常运行 Web 服务，也可以添加任务。
 但只是将需要按时执行的命令写入到`data/windows_crontab.txt`文件中，并不会真正执行。
 
-有三种安装方法：
+有两种安装方法：
 
 - 使用 Docker 安装：简单快捷。但由于运行在 Docker 中，对服务器配置有一定要求
-- 使用脚本安装：使用自动安装脚本直接安装在服务器上。不需要 Docker，对服务器配置要求更低
 - 手工安装：自行手工安装。除了安装 pekja 外还需要逐个安装支持的工具，
-安装后还需要逐个核对、修改`工具表`中各个工具的`调用命令`（详情见后文），较为耗时耗力，故不推荐。
+安装后还需要逐个核对、修改`工具表`中各个工具的`调用命令`（详情见后文），较为耗时耗力，但由于不需要 Docker，对服务器配置要求较低。
 
 ### 方法一：使用 Docker
 
@@ -135,41 +134,7 @@ chmod +x docker/update.sh
 重新导入数据时需按照`工具`->`项目`->`任务`->`批量任务`->`记录`的顺序进行。
 
 
-### 方法二：使用脚本安装
-
-在 Ubuntu 18.04 安装了 Python 3.8 和 pip 的云服务器上下载项目代码并进入项目目录：
-
-```bash
-git clone https://github.com/Werneror/pekja.git
-cd pekja
-```
-
-复制配置文件：
-
-```bash
-cp docker/env.example docker/env
-```
-
-编辑配置文件`env`，按实际情况修改其中的配置：
-
-```bash
-vim docker/env
-```
-
-运行自动安装脚本：
-
-```shell script
-sudo python auto_install/auto_install.py
-```
-
-启动 pekja：
-
-```shell script
-/opt/pekja/docker/start.sh
-```
-
-
-### 方法三：手动安装
+### 方法二：手动安装
 
 #### 安装 pekja
 
@@ -231,6 +196,7 @@ python manage.py runserver 127.0.0.1:8000
 
 在管理后台的`首页`→`Pekja`→`工具`中可以看到目前支持的所用工具。若想使用其中的某个工具，需要打开对应工具的`项目链接`，
 自行安装该工具，最好能安装`工具`中指定的版本。安装完成后，还需根据工具实际路径修改`调用命令`，确保在 Crontab 中可以成功调用。
+安装工具时可参考 Dockerfile。
 
 `工具`中各个字段的含义和作用说明如下：
 
@@ -485,7 +451,7 @@ python manage.py init_admin admin admin@example.com 123456
 ## 下一步计划
 
 - [ ] 添加对更多工具的支持。
-- [ ] 增加更轻量级的部署方式。测试发现 1G 内存的云服务器跑 Docker 有些吃力，因此希望增加更轻量级的部署方式，让 pekja 可以运行在最便宜的 VPS 上。
+- [x] 增加更轻量级的部署方式。测试发现 1G 内存的云服务器跑 Docker 有些吃力，因此希望增加更轻量级的部署方式，让 pekja 可以运行在最便宜的 VPS 上。
 
 
 ## 类似项目
