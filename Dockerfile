@@ -33,10 +33,10 @@ RUN pip install -r /opt/ctfr/requirements.txt
 
 # Install OneForAll
 RUN mkdir -p /opt/oneforall
-RUN wget  https://github.com/shmilylty/OneForAll/archive/v0.3.0.tar.gz
-RUN tar xzf v0.3.0.tar.gz
-RUN mv OneForAll-0.3.0/* .
-RUN rm -rf OneForAll-0.3.0  v0.3.0.tar.gz
+RUN wget https://github.com/shmilylty/OneForAll/archive/v0.3.0.tar.gz -O /opt/oneforall/v0.3.0.tar.gz
+RUN tar xzf /opt/oneforall/v0.3.0.tar.gz -C /opt/oneforall/
+RUN mv /opt/oneforall/OneForAll-0.3.0/* /opt/oneforall
+RUN rm -rf /opt/oneforall/OneForAll-0.3.0 /opt/oneforall/v0.3.0.tar.gz
 RUN apt install -y python3-testresources
 RUN pip install -r /opt/oneforall/requirements.txt
 
