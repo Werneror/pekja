@@ -45,14 +45,12 @@ SRC 情报收集管理系统。
 | Nmap UDP 端口扫描 | UDP 端口 | NmapUdpScanParser | [Nmap](https://nmap.org/) | 7.7.0 |
 | Censys 邮箱采集 | 邮箱 | CensysEnumerationEmail | [censys-enumeration](https://github.com/0xbharath/censys-enumeration) | 10d42fa3 |
 | Sublist3r | 域名 | Sublist3rParser | [Sublist3r](https://github.com/aboul3la/Sublist3r) | 61ebf36 |
-| OneForAll 子域名收集 | 域名 | OneForAllParser | [OneForAll](https://github.com/shmilylty/OneForAll) | b51236a |
+| OneForAll 子域名收集 | 域名 | OneForAllParser | [OneForAll](https://github.com/shmilylty/OneForAll) | 0.3.0 |
 | CTFR | 域名 | CTFRParser | [CTFRParser](https://github.com/UnaPibaGeek/ctfr) | 86a804a |
 | lijiejie/subDomainsBrute | 域名 | LijiejieSubDomainsBrute | [subDomainsBrute](https://github.com/lijiejie/subDomainsBrute) | bac5eb3 |
 | Censys 子域名采集 | 域名 | CensysEnumerationDomain | [censys-enumeration](https://github.com/0xbharath/censys-enumeration) | 10d42fa3 |
 | Nmap 子域名爆破 | 域名 | NmapDnsBruteParser | [Nmap](https://nmap.org/) | 7.7.0 |
 | Nmap HTTP 扫描 | 网站 | NmapHTTPScanParser | [Nmap](https://nmap.org/) | 7.7.0 |
-
-注：OneForAll 子域名收集工具有运行完毕后无法退出的 [BUG](https://github.com/shmilylty/OneForAll/issues/59)，待修复。
 
 ## 名词解释
 

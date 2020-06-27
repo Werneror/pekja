@@ -33,7 +33,10 @@ RUN pip install -r /opt/ctfr/requirements.txt
 
 # Install OneForAll
 RUN mkdir -p /opt/oneforall
-RUN git clone https://gitee.com/shmilylty/OneForAll.git /opt/oneforall
+RUN wget  https://github.com/shmilylty/OneForAll/archive/v0.3.0.tar.gz
+RUN tar xzf v0.3.0.tar.gz
+RUN mv OneForAll-0.3.0/* .
+RUN rm -rf OneForAll-0.3.0  v0.3.0.tar.gz
 RUN apt install -y python3-testresources
 RUN pip install -r /opt/oneforall/requirements.txt
 
