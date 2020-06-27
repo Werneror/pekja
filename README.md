@@ -143,58 +143,37 @@ git clone https://github.com/Werneror/pekja.git
 cd pekja
 ```
 
-安装依赖库：
+参考`Dockerfile`文件安装所有依赖。
+
+复制配置文件：
 
 ```bash
-python -m pip install -r requirements.txt
+cp docker/env.example docker/env
 ```
 
-默认使用 Sqlite3 作为数据库，故可直接创建数据表：
+编辑配置文件`env`，按实际情况修改其中的配置：
 
 ```bash
-python manage.py migrate
-```
-
-也可以修改`pekja/settings.py`中的`DATABASES`等相关配置以使用其他数据库。
-
-导入工具数据：
-
-```bash
-python manage.py loaddata docker/tool.json
-```
-
-创建用户：
-
-```bash
-python manage.py createsuperuser
-```
-
-若想要使用邮件报告功能，在创建用户时需录入真实有效的邮箱地址。
-邮件报告会发到每个用户的邮箱中。
-还需按实际情况修改`pekja/settings.py`中的发送邮件相关的配置：
-
-```Python
-EMAIL_HOST = 'smtp.163.com'    # SMTP 服务器地址
-EMAIL_PORT = 994    # SMTP 服务端口
-EMAIL_USE_SSL = True    # 是否使用 SSl
-EMAIL_HOST_USER = 'pekja@werner.wiki'    # 发件邮箱（用户名）
-EMAIL_HOST_PASSWORD = '**************'    # 密码
+vim docker/env
 ```
 
 运行 Web 服务：
 
+
+第一次运行该脚本前可能需要赋予该脚本可执行权限：
+
 ```bash
-python manage.py runserver 127.0.0.1:8000
+chmod +x docker/start.sh
+nohup ./docker/start.sh &
 ```
 
-若安装成功，在浏览器中访问[http://127.0.0.1:8000]()可以看到登录页面，用刚刚创建的用户可以登录进入 Web 界面。
+若安装成功，在浏览器中访问[http://127.0.0.1:8000]()可以看到登录页面，用写在`docker/env`中的用户可以登录进入 Web 界面。
 点击 Web 界面右上角的用户名，在弹出菜单中点击`管理后台`按钮，可进入到管理后台。
 
-#### 安装工具
+#### 修正工具路径
 
-在管理后台的`首页`→`Pekja`→`工具`中可以看到目前支持的所用工具。若想使用其中的某个工具，需要打开对应工具的`项目链接`，
-自行安装该工具，最好能安装`工具`中指定的版本。安装完成后，还需根据工具实际路径修改`调用命令`，确保在 Crontab 中可以成功调用。
-安装工具时可参考 Dockerfile。
+在管理后台的`首页`→`Pekja`→`工具`中可以看到目前支持的所用工具。若想使用其中的某个工具，
+需根据工具实际路径修改`调用命令`，确保在 Crontab 中可以成功调用。
 
 `工具`中各个字段的含义和作用说明如下：
 
