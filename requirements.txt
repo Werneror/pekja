@@ -1,4 +1,4 @@
-django==3.2.24
+django==4.2.16
 django-import-export==2.0.2
 python-crontab==2.4.0
 psutil==5.7.0
